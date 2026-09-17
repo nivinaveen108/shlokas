@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Śrī Veṅkaṭēśvara Suprabhātam</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700&family=Yantra+Manav:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+       :root {
+            --base-font-size: 2.1rem;
+        }
+
+        body {
+            --bg: #fdfaf1;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --primary: #990000;
+            --accent: #b8860b;
+            --border: #e0d8c3;
+            --footer-bg: #f3eee0;
+            --verse-color: #990000;
+            color-scheme: light;
+
+            /* Consolidated Body Styles */
+            font-family: 'Martel', serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            transition: background 0.3s ease, color 0.3s ease;
+            scroll-behavior: smooth;
+        }
+
+        body[data-theme="dark"] {
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --primary: #ff9933;
+            --accent: #d4af37;
+            --border: #332b21;
+            --footer-bg: #1a1a1a;
+            --verse-color: #ffffff;
+            color-scheme: dark;
+        }
+
+        header { text-align: center; padding: 3rem 1rem 1.5rem; border-bottom: 2px solid var(--border); }
+        header h1 { font-size: 2.5rem; color: var(--primary); margin: 0; }
+        .subtitle { font-size: 1.2rem; color: var(--accent); margin: 5px 0; font-style: italic; }
+
+        .sticky-wrapper {
+            position: sticky; top: 0; z-index: 1100;
+            background: var(--card-bg); box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+        }
+
+        .top-controls-wrapper { border-bottom: 1px solid var(--border); padding: 10px; }
+        .header-controls { display: flex; justify-content: center; align-items: center; gap: 10px; max-width: 900px; margin: 0 auto; flex-wrap: wrap; }
+        .control-group { display: flex; align-items: center; gap: 8px; border-right: 1px solid var(--border); padding-right: 10px; }
+        .control-group:last-child { border: none; }
+
+        .icon-btn {
+            background: var(--card-bg); border: 1px solid var(--accent); color: var(--accent);
+            width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.2s; font-size: 0.9rem;
+        }
+        .icon-btn.active { background: var(--primary) !important; color: white !important; border-color: var(--primary) !important; }
+        
+        .speed-control, .repeat-select {
+            background: var(--card-bg); border: 1px solid var(--accent); color: var(--accent);
+            border-radius: 4px; padding: 4px; font-size: 0.8rem; font-weight: bold; outline: none;
+        }
+
+        nav { background: var(--card-bg); border-bottom: 1px solid var(--border); display: flex; justify-content: center; transition: background 0.3s ease; }
+        .nav-item { position: relative; padding: 10px 15px; }
+        .nav-item > span { color: var(--primary); font-weight: bold; font-size: 0.75rem; text-transform: uppercase; cursor: pointer; }
+        
+        .dropdown-content {
+            display: none; position: absolute; background: var(--card-bg);
+            min-width: 150px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1; border: 1px solid var(--border); border-top: 3px solid var(--primary);
+            max-height: 350px; overflow-y: auto; padding: 8px; left: 50%; transform: translateX(-50%);
+            grid-template-columns: repeat(3, 1fr); gap: 4px;
+        }
+        .nav-item:hover .dropdown-content { display: grid; }
+        
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .stanza-card {
+            background: var(--card-bg); border: 1px solid var(--border); border-top: 4px solid var(--primary);
+            border-radius: 8px; padding: 2rem; margin-bottom: 3rem; position: relative; transition: 0.3s;
+        }
+        .stanza-card.playing { border-top-color: var(--accent); box-shadow: 0 0 20px rgba(184, 134, 11, 0.3); }
+        
+        .section-header { text-align: center; color: var(--primary); border-bottom: 2px solid var(--border); padding-bottom: 10px; margin: 40px 0; text-transform: uppercase; letter-spacing: 2px; }
+        .devanagari { 
+            font-size: var(--base-font-size) !important; 
+            text-align: center; 
+            margin-bottom: 1.5rem; 
+            line-height: 1.6; 
+            color: var(--verse-color); 
+            font-weight: 700; 
+        }
+        .heading { 
+            font-size: 0.7rem; 
+            color: var(--accent); 
+            text-transform: uppercase; 
+            display: block; 
+            margin: 1rem 0 0.3rem; 
+            font-weight: bold; 
+        }
+        .iast-content { 
+            font-size: 1.1rem; 
+            font-style: italic; 
+            margin-bottom: 1rem; 
+        }
+        .translation { 
+            font-size: 1rem; 
+            color: var(--text-muted); 
+            border-top: 1px solid var(--border); 
+            padding-top: 0.8rem; 
+            line-height: 1.5; 
+        }
+        .meanings { 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            font-family: 'Yantra Manav', sans-serif; 
+            line-height: 1.4; 
+        }
+   /* Container for word meanings - Now fully theme-aware */
+.word-meanings {
+    background-color: var(--footer-bg); /* Uses theme's softer background */
+    border-left: 4px solid var(--accent); /* Matches your theme's gold/accent color */
+    padding: 15px;
+    margin: 10px 0;
+    color: var(--text-main); /* Deep contrast in light, light gray in dark */
+    line-height: 1.6;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Dictionary style list using dl, dt, dd */
+.word-meanings dl {
+    display: grid;
+    grid-template-columns: max-content auto;
+    grid-gap: 8px 15px;
+    margin: 0;
+}
+
+.word-meanings dt {
+    font-weight: 800;
+    color: var(--primary); /* Makes the Sanskrit terms stand out in theme color */
+}
+
+.word-meanings dd {
+    margin: 0;
+    font-style: italic;
+    color: var(--text-muted); /* Softer secondary text color */
+}
+
+/* Styled Clickable Button - Now fully theme-aware */
+.word-details summary {
+    cursor: pointer;
+    background: var(--footer-bg); /* Button background adapts */
+    border: 1px solid var(--border); /* Subtle border for definition */
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: var(--accent); /* Gold/Bronze text to match theme */
+    list-style: none;
+    transition: background 0.3s ease;
+}
+
+.word-details summary:hover {
+    background: var(--border); /* Slight highlight on hover */
+}
+
+/* For browsers that show the disclosure triangle */
+.word-details summary::-webkit-details-marker {
+    display: none;
+}
+
+
+
+        audio { width: 100%; margin-top: 1.5rem; border-radius: 8px; filter: grayscale(1) invert(var(--audio-invert, 0)); opacity: 0.8; }
+        body[data-theme="dark"] { --audio-invert: 1; }
+        
+        footer { background: var(--footer-bg); padding: 3rem 1rem; text-align: center; border-top: 2px solid var(--border); margin-top: 4rem; }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <header>
+        <h1>श्रीवेङ्कटेश्वर सुप्रभातम</h1>
+        <p class="subtitle">Śrī Veṅkaṭēśvara Suprabhātam</p>
+	<div class="guruji-header"></div>
+<div class="guruji-credit">
+            Audio - Shri. Ramabhadran V Guruji <a href="https://www.visvasvsn.org/" target="_blank"> (VISVAS)</a>
+        </div>
+	<div class="source-credit">
+            Text ref: <a href="http://shlokam.org" target="_blank">shlokam.org</a>
+        </div>
+    </header>
+
+    <div class="sticky-wrapper">
+        <div class="top-controls-wrapper">
+            <div class="header-controls">
+<div class="control-group">
+    <span style="font-size:0.6rem">MODE:</span>
+    <button class="icon-btn" id="loop-btn" onclick="togglePlayMode('loop')" title="Loop Verse">
+        <i class="fa-solid fa-arrows-rotate"></i>
+    </button>
+    <button class="icon-btn" id="cont-btn" onclick="togglePlayMode('cont')" title="Continuous">
+        <i class="fa-solid fa-forward-step"></i>
+    </button>
+    <!-- PLACE THE NEW BUTTON HERE -->
+    <button class="icon-btn" id="parayana-btn" onclick="togglePlayMode('parayana')" title="Pārāyaṇa Mode ">
+        <i class="fa-solid fa-book-open-reader"></i>
+    </button>
+</div>
+                
+                <div class="control-group">
+                    <span style="font-size:0.6rem">REPEAT:</span>
+                    <select class="repeat-select" id="repeat-count">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <span style="font-size:0.6rem">SPEED:</span>
+                    <select class="speed-control" onchange="changePlaybackSpeed(this.value)">
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1.0x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="1.75">1.75x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <button class="icon-btn" onclick="adjustFont(0.2)"><i class="fa-solid fa-plus"></i></button>
+                    <button class="icon-btn" onclick="adjustFont(-0.2)"><i class="fa-solid fa-minus"></i></button>
+                    <button class="icon-btn" id="theme-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+                </div>
+            </div>
+        </div>
+        <nav><div class="nav-item"><span onclick="jumpTo('suprabhatam')">Suprabhātam</span><div class="dropdown-content"><button onclick="jumpTo('suprabhatam-1')">1</button><button onclick="jumpTo('suprabhatam-2')">2</button><button onclick="jumpTo('suprabhatam-3')">3</button><button onclick="jumpTo('suprabhatam-4')">4</button><button onclick="jumpTo('suprabhatam-5')">5</button><button onclick="jumpTo('suprabhatam-6')">6</button><button onclick="jumpTo('suprabhatam-7')">7</button><button onclick="jumpTo('suprabhatam-8')">8</button><button onclick="jumpTo('suprabhatam-9')">9</button><button onclick="jumpTo('suprabhatam-10')">10</button><button onclick="jumpTo('suprabhatam-11')">11</button><button onclick="jumpTo('suprabhatam-12')">12</button><button onclick="jumpTo('suprabhatam-13')">13</button><button onclick="jumpTo('suprabhatam-14')">14</button><button onclick="jumpTo('suprabhatam-15')">15</button><button onclick="jumpTo('suprabhatam-16')">16</button><button onclick="jumpTo('suprabhatam-17')">17</button><button onclick="jumpTo('suprabhatam-18')">18</button><button onclick="jumpTo('suprabhatam-19')">19</button><button onclick="jumpTo('suprabhatam-20')">20</button><button onclick="jumpTo('suprabhatam-21')">21</button><button onclick="jumpTo('suprabhatam-22')">22</button><button onclick="jumpTo('suprabhatam-23')">23</button><button onclick="jumpTo('suprabhatam-24')">24</button><button onclick="jumpTo('suprabhatam-25')">25</button><button onclick="jumpTo('suprabhatam-26')">26</button><button onclick="jumpTo('suprabhatam-27')">27</button><button onclick="jumpTo('suprabhatam-28')">28</button><button onclick="jumpTo('suprabhatam-29')">29</button></div></div><div class="nav-item"><span onclick="jumpTo('stotram')">Stotram</span><div class="dropdown-content"><button onclick="jumpTo('stotram-1')">1</button><button onclick="jumpTo('stotram-2')">2</button><button onclick="jumpTo('stotram-3')">3</button><button onclick="jumpTo('stotram-4')">4</button><button onclick="jumpTo('stotram-5')">5</button><button onclick="jumpTo('stotram-6')">6</button><button onclick="jumpTo('stotram-7')">7</button><button onclick="jumpTo('stotram-8')">8</button><button onclick="jumpTo('stotram-9')">9</button><button onclick="jumpTo('stotram-10')">10</button><button onclick="jumpTo('stotram-11')">11</button></div></div><div class="nav-item"><span onclick="jumpTo('prapatti')">Prapatti</span><div class="dropdown-content"><button onclick="jumpTo('prapatti-1')">1</button><button onclick="jumpTo('prapatti-2')">2</button><button onclick="jumpTo('prapatti-3')">3</button><button onclick="jumpTo('prapatti-4')">4</button><button onclick="jumpTo('prapatti-5')">5</button><button onclick="jumpTo('prapatti-6')">6</button><button onclick="jumpTo('prapatti-7')">7</button><button onclick="jumpTo('prapatti-8')">8</button><button onclick="jumpTo('prapatti-9')">9</button><button onclick="jumpTo('prapatti-10')">10</button><button onclick="jumpTo('prapatti-11')">11</button><button onclick="jumpTo('prapatti-12')">12</button><button onclick="jumpTo('prapatti-13')">13</button><button onclick="jumpTo('prapatti-14')">14</button><button onclick="jumpTo('prapatti-15')">15</button><button onclick="jumpTo('prapatti-16')">16</button></div></div><div class="nav-item"><span onclick="jumpTo('mangalam')">Maṅgalāśāsanam</span><div class="dropdown-content"><button onclick="jumpTo('mangalam-1')">1</button><button onclick="jumpTo('mangalam-2')">2</button><button onclick="jumpTo('mangalam-3')">3</button><button onclick="jumpTo('mangalam-4')">4</button><button onclick="jumpTo('mangalam-5')">5</button><button onclick="jumpTo('mangalam-6')">6</button><button onclick="jumpTo('mangalam-7')">7</button><button onclick="jumpTo('mangalam-8')">8</button><button onclick="jumpTo('mangalam-9')">9</button><button onclick="jumpTo('mangalam-10')">10</button><button onclick="jumpTo('mangalam-11')">11</button><button onclick="jumpTo('mangalam-12')">12</button><button onclick="jumpTo('mangalam-13')">13</button><button onclick="jumpTo('mangalam-14')">14</button></div></div></nav>
+    </div>
+
+    <div class="container"><h2 id="suprabhatam" class="section-header">Suprabhātam</h2>
+            <div class="stanza-card" id="suprabhatam-1">
+                <div class="devanagari">कौसल्या सुप्रजा राम पूर्वासन्ध्या प्रवर्तते ।<br>उत्तिष्ठ नरशार्दूल कर्त्तव्यं दैवमाह्निकम् ॥१॥ ( 2 )</div>
+                <span class="heading">IAST</span><div class="iast-content">kausalyā suprajā rāma pūrvāsandhyā pravartate .<br>uttiṣṭha naraśārdūla karttavyaṃ daivamāhnikam ..1.. ( 2 )</div>
+    <details class="word-details">
+        <summary class="heading">Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <p><b>Kausalyā-suprajā:</b> Noble son of Kausalya</p>
+            <p><b>Rāma:</b> O Rama</p>
+            <p><b>Pūrvā-sandhyā:</b> The morning twilight (dawn)</p>
+            <p><b>Pravartate:</b> Is beginning/approaching</p>
+            <p><b>Uttiṣṭha:</b> Wake up / Arise</p>
+            <p><b>Nara-śārdūla:</b> O Tiger among men (best of men)</p>
+            <p><b>Kartavyaṃ:</b> To be performed</p>
+            <p><b>Daivamāhnikam:</b> Daily divine rituals</p>
+        </div>
+    </details>           
+<span class="heading">Translation</span><div class="translation">O Rama, son of Kausalya, the sun is about to rise in the eastern skies; please arise to offer the early morning oblations.</div>
+                
+                <audio controls preload="none" data-start="2.7">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_01.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-2">
+                <div class="devanagari">उत्तिष्ठोत्तिष्ठ गोविन्द उत्तिष्ठ गरुडध्वज ।<br>उत्तिष्ठ कमलाकान्त त्रैलोक्यं मङ्गलं कुरु ॥२॥ ( 2 )</div>
+                <span class="heading">IAST</span><div class="iast-content">uttiṣṭhottiṣṭha govinda uttiṣṭha garuḍadhvaja .<br>uttiṣṭha kamalākānta trailokyaṃ maṅgalaṃ kuru ..2.. ( 2 )</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Uttiṣṭha-Uttiṣṭha</dt><dd>Wake up, Wake up (repeated for emphasis)</dd>
+                <dt>Govinda</dt><dd>O Govinda (Protector of cows/souls)</dd>
+                <dt>Garuḍadhvaja</dt><dd>One who has Garuda on His flag</dd>
+                <dt>Kamalākānta</dt><dd>Beloved of Kamala (Goddess Lakshmi)</dd>
+                <dt>Trailokyam</dt><dd>For all the three worlds</dd>
+                <dt>Maṅgalaṃ</dt><dd>Auspiciousness / Good fortune</dd>
+                <dt>Kuru</dt><dd>Please grant / please do</dd>
+            </dl>
+        </div>
+    </details>                
+<span class="heading">Translation</span><div class="translation">Arise O Govinda the holder of flag with Garuda emblem; Cast aside your sleep to bestow your protection and solace to the Universe.</div>
+                
+                <audio controls preload="none" data-start="5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_02.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-3">
+                <div class="devanagari">मातस्समस्तजगतां मधुकैटभारेः<br>वक्षोविहारिणि मनोहरदिव्यमूर्ते ।<br>श्रीस्वामिनि श्रितजनप्रियदानशीले<br>श्रीवेङ्कटेशदयिते तव सुप्रभातम् ॥३॥ ( 2 )</div>
+                <span class="heading">IAST</span><div class="iast-content">mātassamastajagatāṃ madhukaiṭabhāreḥ<br>vakṣovihāriṇi manoharadivyamūrte .<br>śrīsvāmini śritajanapriyadānaśīle<br>śrīveṅkaṭeśadayite tava suprabhātam ..3.. ( 2 )</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Mātas-samasta-jagatām</dt><dd>O Mother of all the worlds</dd>
+                <dt>Madhu-kaiṭabhāreḥ</dt><dd>Of the enemy of demons Madhu and Kaitabha (Lord Vishnu)</dd>
+                <dt>Vakṣo-vihāriṇi</dt><dd>One who dwells/plays on His chest</dd>
+                <dt>Manohara-divyamūrte</dt><dd>One with a heart-stealing, divine form</dd>
+                <dt>Śrī-svāmini</dt><dd>O Supreme Mistress (Sri Lakshmi)</dd>
+                <dt>Śrita-jana-priya-dānaśīle</dt><dd>Whose nature is to grant what is dear to those who seek refuge</dd>
+                <dt>Śrī-veṅkaṭeśa-dayite</dt><dd>O beloved of Lord Venkateswara</dd>
+                <dt>Tava Suprabhātam</dt><dd>May it be an auspicious dawn to Thee</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">Sri Lakshmi, mother of the world, you reside in the heart of Mahavisnu; O beautiful one that captures the attention of the minds of humans, O bestower of all benefits to those who fall at His feet, O dear and beloved one to Lord Venkateswara, I offer these morning Pranams to you.</div>
+                
+                <audio controls preload="none" data-start="3.9">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_03.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-4">
+                <div class="devanagari">तव सुप्रभातमरविन्दलोचने<br>भवतु प्रसन्नमुखचन्द्रमण्डले ।<br>विधिशङ्करेन्द्रवनिताभिरर्चिते<br>वृशशैलनाथदयिते दयानिधे ॥४॥</div>
+                <span class="heading">IAST</span><div class="iast-content">tava suprabhātamaravindalocane<br>bhavatu prasannamukhacandramaṇḍale .<br>vidhiśaṅkarendravanitābhirarcite<br>vṛśaśailanāthadayite dayānidhe ..4..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Tava Suprabhātam</dt><dd>An auspicious dawn to Thee</dd>
+                <dt>Aravinda-locane</dt><dd>O Lotus-eyed one</dd>
+                <dt>Bhavatu</dt><dd>May it be</dd>
+                <dt>Prasanna-mukha-candramaṇḍale</dt><dd>One with a face like the bright orb of the moon</dd>
+                <dt>Vidhi-śaṅkara-indra-vanitābhiḥ</dt><dd>By the consorts (Saraswati, Parvati, Sachi) of Brahma, Shiva, and Indra</dd>
+                <dt>Arcite</dt><dd>One who is worshipped</dd>
+                <dt>Vṛṣa-śaila-nātha-dayite</dt><dd>O beloved of the Lord of Vrishadri (Venkateswara)</dd>
+                <dt>Dayā-nidhe</dt><dd>O Treasure-house of mercy</dd>
+            </dl>
+        </div>
+    </details>                
+<span class="heading">Translation</span><div class="translation">O Devi, good morning to you whose eyes are like the lotus and the bright face of the full moon; the consorts of Brahma, Sankara and Indra pay their respects to you the ocean of mercy dear to the Lord of the Vrishabadri.</div>
+                
+                <audio controls preload="none" data-start="2.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_04.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-5">
+                <div class="devanagari">अत्र्यादिसप्तऋषयस्समुपास्य सन्ध्यां<br>आकाशसिन्धुकमलानि मनोहराणि ।<br>आदाय पादयुगमर्चयितुं प्रपन्नाः<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥५॥</div>
+                <span class="heading">IAST</span><div class="iast-content">atryādisaptaṛṣayassamupāsya sandhyāṃ<br>ākāśasindhukamalāni manoharāṇi .<br>ādāya pādayugamarcayituṃ prapannāḥ<br>śeṣādriśekharavibho tava suprabhātam ..5..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Atryādi-Saptaṛṣayaḥ</dt><dd>The seven sages beginning with Atri</dd>
+                <dt>Samupāsya Sandhyāṃ</dt><dd>Having performed their morning prayers (Sandhyavandanam)</dd>
+                <dt>Ākāśa-Sindhu-Kamalāni</dt><dd>Lotuses from the heavenly Ganges (Akasha Ganga)</dd>
+                <dt>Manoharāṇi</dt><dd>Which are heart-stealing / beautiful</dd>
+                <dt>Ādāya</dt><dd>Having taken/brought them</dd>
+                <dt>Pādayugam-Arcayituṃ</dt><dd>To worship Your pair of feet</dd>
+                <dt>Prapannāḥ</dt><dd>Have arrived / sought refuge</dd>
+                <dt>Śeṣādri-Śekhara-Vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O resident of Sehadri, the seven holy rishis headed by Atri, having performed their morning sandhya, are at your feet offering beautiful lotuses and the waters of heavenly rivers, please receive them.</div>
+                
+                <audio controls preload="none" data-start="5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_05.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-6">
+                <div class="devanagari">पञ्चाननाब्जभवषण्मुखवासवाद्याः<br>त्रैविक्रमादिचरितं विबुधाः स्तुवन्ति ।<br>भाषापतिः पठति वासरशुद्धिमारात्<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥६॥</div>
+                <span class="heading">IAST</span><div class="iast-content">pañcānanābja bhava ṣaṇmukhavāsavādyāḥ<br>traivikramādicaritaṃ vibudhāḥ stuvanti .<br>bhāṣāpatiḥ paṭhati vāsaraśuddhimārāt<br>śeṣādriśekharavibho tava suprabhātam ..6..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Pañcānana-Abjabhava</dt><dd>The five-faced Shiva and lotus-born Brahma</dd>
+                <dt>Ṣaṇmukha-Vāsava-Ādyāḥ</dt><dd>The six-faced Skanda, Indra, and other gods</dd>
+                <dt>Traivikrama-Ādi-Caritaṃ</dt><dd>The stories of incarnations like Trivikrama</dd>
+                <dt>Vibudhāḥ Stuvanti</dt><dd>The learned gods are singing praises</dd>
+                <dt>Bhāṣāpatiḥ Paṭhati</dt><dd>Lord Brahma (Master of Language) reads</dd>
+                <dt>Vāśara-Śuddhim-Ārāt</dt><dd>The almanac (Panchangam/day's purity) nearby</dd>
+                <dt>Śeṣādri-Śekhara-Vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">All the Gods from Brahma, Shiva, Shanmukha and others are praising your TriVikrama avathara, Brhaspathi, the Purohita of Devas is reading out the Panchangam (almanac), O Lord may this morning be glorious.</div>
+                
+                <audio controls preload="none" data-start="5.4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_06.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-7">
+                <div class="devanagari">ईषत्प्रफुल्लसरसीरुहनारिकेल<br>पूगद्रुमादिसुमनोहरपालिकानाम् ।<br>आवाति मन्दमनिलस्सह दिव्यगन्धैः<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥७॥ ( 2 )</div>
+                <span class="heading">IAST</span><div class="iast-content">īṣatpraphullasarasīruhanārikela<br>pūgadrumādisumanoharapālikānām .<br>āvāti mandamanilassaha divyagandhaiḥ<br>śeṣādriśekharavibho tava suprabhātam ..7.. ( 2 )</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Īṣat-praphulla</dt><dd>Slightly blossomed</dd>
+                <dt>Sarasīruha</dt><dd>Lotuses (born in the lake)</dd>
+                <dt>Nārikela</dt><dd>Coconut trees</dd>
+                <dt>Pūgadruma-ādi</dt><dd>Betel nut (Areca) trees and others</dd>
+                <dt>Su-manohara-pālikānām</dt><dd>From the very beautiful groves/gardens</dd>
+                <dt>Āvāti mandam</dt><dd>Blows gently</dd>
+                <dt>Anilaḥ-saha</dt><dd>The breeze, along with...</dd>
+                <dt>Divya-gandhaiḥ</dt><dd>Divine fragrances</dd>
+                <dt>Śeṣādri-Śekhara-Vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>                
+<span class="heading">Translation</span><div class="translation">O Sehadri vasa, the morning scene is beautiful with the tossing of water lillies, cocoanut trees and transplanted young paddy fields, the morning breeze is blowing carrying pleasant smells, good morning to you</div>
+                
+                <audio controls preload="none" data-start="4.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_07.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-8">
+                <div class="devanagari">उन्मील्य नेत्रयुगमुत्तमपञ्जरस्थाः<br>पात्रावशिष्टकदलीफलपायसानि ।<br>भुक्त्वा सलीलमथ केलिशुकाः पठन्ति<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥८॥</div>
+                <span class="heading">IAST</span><div class="iast-content">unmīlya netrayugamuttamapañjarasthāḥ<br>pātrāvaśiṣṭakadalīphalapāyasāni .<br>bhuktvā salīlamatha keliśukāḥ paṭhanti<br>śeṣādriśekharavibho tava suprabhātam ..8..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Unmīlya netrayugam</dt><dd>Having opened their pair of eyes</dd>
+                <dt>Uttama-pañjarasthāḥ</dt><dd>Staying in their excellent cages</dd>
+                <dt>Pātrāvaśiṣṭa</dt><dd>The remains left in the vessels</dd>
+                <dt>Kadalīphala-pāyasāni</dt><dd>Banana fruits and sweetened milk (payasam)</dd>
+                <dt>Bhuktvā salīlam</dt><dd>Having eaten playfully</dd>
+                <dt>Atha keli-śukāḥ</dt><dd>Then, the pet parrots</dd>
+                <dt>Paṭhanti</dt><dd>Are reciting (prayers/verses)</dd>
+                <dt>Śeṣādri-śekhara-vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Venkateswara, the temple parrots are singing pleasantly after having tasted the fruits, payasa in your Pooja vessels and quenching their thirst; I pray for a good morning to you.</div>
+                
+                <audio controls preload="none" data-start="5.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_08.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-9">
+                <div class="devanagari">तन्त्रीप्रकर्षमधुरस्वनया विपञ्च्या<br>गायत्यनन्तचरितं तव नारदोऽपि ।<br>भाषासमग्रमसकृत्करचाररम्यं<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥९॥</div>
+                <span class="heading">IAST</span><div class="iast-content">tantrīprakarṣamadhurasvanayā vipañcyā<br>gāyatyanantacaritaṃ tava nārado'pi .<br>bhāṣāsamagrama sakṛtkara cāraramyaṃ<br>śeṣādriśekharavibho tava suprabhātam ..9..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Tantrī-prakarṣa</dt><dd>By the strumming of the strings</dd>
+                <dt>Madhura-svanayā</dt><dd>With a sweet sound/melody</dd>
+                <dt>Vipañcyā</dt><dd>On the lute (Veena)</dd>
+                <dt>Gāyati</dt><dd>Is singing</dd>
+                <dt>Ananta-caritaṃ</dt><dd>The endless stories/glories</dd>
+                <dt>Nārado'pi</dt><dd>Even Sage Narada</dd>
+                <dt>Bhāṣā-samagram</dt><dd>With perfect language/lyrics</dd>
+                <dt>Asakṛt-karacāra-ramyaṃ</dt><dd>Accompanied by beautiful and graceful hand movements</dd>
+                <dt>Śeṣādri-śekhara-vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">With his melodious musical instruments Sage Narada is singing your endless stories set to music and dancing to the enchanting music with lovely hand gestures, may this morning be beautiful.</div>
+                
+                <audio controls preload="none" data-start="4.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_09.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-10">
+                <div class="devanagari">भृङ्गावली च मकरन्दरसानुविद्ध<br>झङ्कारगीतनिनदैस्सह सेवनाय ।<br>निर्यात्युपान्तसरसीकमलोदरेभ्यः<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥१०॥</div>
+                <span class="heading">IAST</span><div class="iast-content">bhṛṅgāvalī ca makarandarasānuviddha<br>jhaṅkāragītaninadaissaha sevanāya .<br>niryātyupānta sarasī kamalodarebhyaḥ<br>śeṣādriśekharavibho tava suprabhātam ..10..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Bhṛṅgāvalī ca</dt><dd>And swarms of bees</dd>
+                <dt>Makaranda-rasa-anuviddha</dt><dd>Having tasted/sucked the sweet nectar</dd>
+                <dt>Jhaṅkāra-gīta-ninadaiḥ-saha</dt><dd>Accompanied by the singing sounds of humming</dd>
+                <dt>Sevanāya</dt><dd>In order to serve (You)</dd>
+                <dt>Niryāti</dt><dd>Are emerging / coming out</dd>
+                <dt>Upānta-sarasī-kamala-udarebhyaḥ</dt><dd>From the interiors of lotuses in the nearby lakes</dd>
+                <dt>Śeṣādri-śekhara-vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Lord of Seshagiri, the swarm of bees from the lotus flowers of the nearby tank have come out after tasting the honey and carrying makharanda pollen, waiting for your Dharsan.</div>
+                
+                <audio controls preload="none" data-start="3.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_10.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-11">
+                <div class="devanagari">योषागणेन वरदध्नि विमथ्यमाने<br>घोषालयेषु दधिमन्थनतीव्रघोषाः ।<br>रोषात्कलिं विदधते ककुभश्च कुम्भाः<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥११॥</div>
+                <span class="heading">IAST</span><div class="iast-content">yoṣāgaṇena varadadhni vimathyamāne<br>ghoṣālayeṣu dadhimanthanatīvraghoṣāḥ .<br>roṣātkaliṃ vidadhate kakubhaśca kumbhāḥ<br>śeṣādriśekharavibho tava suprabhātam ..11..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Yoṣā-gaṇena</dt><dd>By groups of cowherd women</dd>
+                <dt>Vara-dadhni</dt><dd>Excellent curd</dd>
+                <dt>Vimathyamāne</dt><dd>Being churned</dd>
+                <dt>Ghoṣālayeṣu</dt><dd>In the homes of the cowherd village</dd>
+                <dt>Dadhi-manthana-tīvra-ghoṣāḥ</dt><dd>The loud sounds of churning curd</dd>
+                <dt>Roṣāt-kaliṃ vidadhate</dt><dd>As if engaging in an angry quarrel</dd>
+                <dt>Kakubhaśca kumbhāḥ</dt><dd>Between the directions (echoes) and the pots</dd>
+                <dt>Śeṣādri-śekhara-vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Lord, the milk maids are churning their curd pots and are singing; the two sounds are competing with each other. May this morning be glorious to you.</div>
+                
+                <audio controls preload="none" data-start="4.6">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_11.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-12">
+                <div class="devanagari">पद्मेशमित्रशतपत्रगतालिवर्गाः<br>हर्तुं श्रियं कुवलयस्य निजाङ्गलक्ष्म्या ।<br>भेरीनिनादमिव बिभ्रति तीव्रनादं<br>शेषाद्रिशेखरविभो तव सुप्रभातम् ॥१२॥</div>
+                <span class="heading">IAST</span><div class="iast-content">padmeśamitraśatapatragatālivargāḥ<br>hartuṃ śriyaṃ kuvalayasya nijāṅgalakṣmyā .<br>bherīninādamiva bibhrati tīvranādaṃ<br>śeṣādriśekharavibho tava suprabhātam ..12..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Padmeśa-mitra</dt><dd>The friend of the Lord of Lotuses (the Sun)</dd>
+                <dt>Śatapatra-gatā</dt><dd>Seated on the hundred-petaled lotuses</dd>
+                <dt>Ali-vargāḥ</dt><dd>Swarms of bees</dd>
+                <dt>Hartuṃ śriyaṃ</dt><dd>To steal the beauty</dd>
+                <dt>Kuvalayasya</dt><dd>Of the blue lilies</dd>
+                <dt>Nijāṅga-lakṣmyā</dt><dd>With the splendor of their own bodies</dd>
+                <dt>Bherī-ninādam-iva</dt><dd>Like the sounding of kettle-drums (Bheri)</dd>
+                <dt>Bibhrati tīvra-nādaṃ</dt><dd>Are producing a loud humming sound</dd>
+                <dt>Śeṣādri-śekhara-vibho</dt><dd>O Lord of the peak of Seshadri hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">The friends of the bees are trying to steal away the bluish brightness of the flowers and the sound of the drums. May this morning be glorious to you.</div>
+                
+                <audio controls preload="none" data-start="4.6">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_12.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-13">
+                <div class="devanagari">श्रीमन्नभीष्टवरदाखिललोकबन्धो<br>श्रीश्रीनिवास जगदेकदयैकसिन्धो ।<br>श्रीदेवतागृहभुजान्तरदिव्यमूर्ते<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥१३॥ ( 2 )</div>
+                <span class="heading">IAST</span><div class="iast-content">śrīmannabhīṣṭa varadākhila lokabandho<br>śrīśrīnivāsa jagadekadayaikasindho .<br>śrīdevatāgṛhabhujāntaradivyamūrte<br>śrīveṅkaṭācalapate tava suprabhātam ..13.. ( 2 )</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Śrīman</dt><dd>Possessor of Lakshmi / O Illustrious one</dd>
+                <dt>Abhīṣṭa-varada</dt><dd>Granter of desired boons</dd>
+                <dt>Akhila-loka-bandho</dt><dd>Friend/Relative of all the worlds</dd>
+                <dt>Śrī-śrīnivāsa</dt><dd>O abode of Sri (Lakshmi)</dd>
+                <dt>Jagad-eka-dayā-sindho</dt><dd>The unique ocean of mercy for the universe</dd>
+                <dt>Śrī-devatā-gṛha</dt><dd>The abode of Goddess Lakshmi</dd>
+                <dt>Bhujāntara</dt><dd>Within the space between the arms (the chest)</dd>
+                <dt>Divya-mūrte</dt><dd>O Divine form</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Srinivasa, bestower of all desired boons, closest kith and kin of the universe, ocean of compassion, O Lord of charming beautiful form in the abode of the Gods, let this morn bring glory to you.</div>
+                
+                <audio controls preload="none" data-start="3.7">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_13.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-14">
+                <div class="devanagari">श्रीस्वामिपुष्करिणिकाप्लवनिर्मलाङ्गाः<br>श्रेयोऽर्थिनो हरविरिञ्चिसनन्दनाद्याः ।<br>द्वारे वसन्ति वरवेत्रहतोत्तमाङ्गाः<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥१४॥</div>
+                <span class="heading">IAST</span><div class="iast-content">śrī svāmi puṣkariṇikāplava nirmalāṅgāḥ<br>śreyo'rthino haraviriñcisanandanādyāḥ .<br>dvāre vasanti varavetra hatottamāṅgāḥ<br>śrīveṅkaṭācalapate tava suprabhātam ..14..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Śrī-svāmī-puṣkariṇi</dt><dd>The holy Swami Pushkarini lake</dd>
+                <dt>Kāplava-nirmala-aṅgāḥ</dt><dd>Those whose bodies are purified by bathing</dd>
+                <dt>Śreyaḥ-arthinaḥ</dt><dd>Those who seek spiritual well-being/blessings</dd>
+                <dt>Hara-viriñci</dt><dd>Lord Shiva (Hara) and Lord Brahma (Virinchi)</dd>
+                <dt>Sanandana-ādyāḥ</dt><dd>Sage Sanandana and others</dd>
+                <dt>Dvāre vasanti</dt><dd>Are waiting at the doorstep/gate</dd>
+                <dt>Vara-vetra-hata</dt><dd>Being touched by the sacred staff (of the gatekeeper)</dd>
+                <dt>Uttama-aṅgāḥ</dt><dd>On their heads (the highest part of the body)</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">Having taken their holy dip in the Swami pushkarini, Gods like Brahma and Siva and sages such as Sanandana are waiting at the door for your Dharsan with their hands raised holding the rattan cane (for controlling the crowds). Glorious morning to you.</div>
+                
+                <audio controls preload="none" data-start="4.3">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_14.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-15">
+                <div class="devanagari">श्रीशेषशैल गरुडाचलवेङ्कटाद्रि<br>नारायणाद्रि वृषभाद्रिवृषाद्रि मुख्याम् ।<br>आख्यां त्वदीयवसतेरनिशं वदन्ति<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥१५॥</div>
+                <span class="heading">IAST</span><div class="iast-content">śrīśeṣaśaila garuḍācalaveṅkaṭādri<br>nārāyaṇādri vṛṣabhādrivṛṣādri mukhyām .<br>ākhyāṃ tvadīyavasateraniśaṃ vadanti<br>śrīveṅkaṭācalapate tava suprabhātam ..15..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Śrī-śeṣaśaila</dt><dd>Seshadri (The hill of the serpent Sesha)</dd>
+                <dt>Garuḍācala</dt><dd>Garudadri (The hill of Garuda)</dd>
+                <dt>Veṅkaṭādri</dt><dd>Venkatadri (The hill that burns sins)</dd>
+                <dt>Nārāyaṇādri</dt><dd>Narayanadri (The hill of Narayana)</dd>
+                <dt>Vṛṣabhādri</dt><dd>Vrishabhadri (The hill of the pious)</dd>
+                <dt>Vṛṣādri</dt><dd>Vrishadri (The hill of Dharma)</dd>
+                <dt>Mukhyām</dt><dd>The prominent/chief names</dd>
+                <dt>Ākhyāṃ</dt><dd>Names/titles</dd>
+                <dt>Tvadīya-vasateḥ</dt><dd>Of Your residence (the hills)</dd>
+                <dt>Aniśaṃ vadanti</dt><dd>Constanty chanting/reciting</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">Glory to you O Venkatesa, whose abode is described incessantly in the Holy books, variously as Seshachala, Garudachala, Venkatadri, Narayanadri, Vrishabahadri and Vrishadri.</div>
+                
+                <audio controls preload="none" data-start="4.1">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_15.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-16">
+                <div class="devanagari">सेवापराश्शिवसुरेशकृशानुधर्म<br>रक्षोऽम्बुनाथ पवमान धनादिनाथाः ।<br>बद्धाञ्जलि प्रविलसन्निजशीर्ष देशाः<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥१६॥</div>
+                <span class="heading">IAST</span><div class="iast-content">sevāparāśśiva sureśa kṛśānudharma<br>rakṣo'mbunātha pavamāna dhanādināthāḥ .<br>baddhāñjali pravilasannijaśīrṣa deśāḥ<br>śrīveṅkaṭācalapate tava suprabhātam ..16..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Sevā-parāḥ</dt><dd>Intent on serving (You)</dd>
+                <dt>Śiva-Sureśa</dt><dd>Shiva and Indra (the King of Gods)</dd>
+                <dt>Kṛśānu-Dharma</dt><dd>Agni (Fire) and Yama (Lord of Dharma)</dd>
+                <dt>Rakṣo-Ambunātha</dt><dd>Nirriti and Varuna (Lord of Waters)</dd>
+                <dt>Pavamāna-Dhanādināthāḥ</dt><dd>Vayu (Wind) and Kubera (Lord of Wealth)</dd>
+                <dt>Baddha-añjali</dt><dd>With hands folded in prayer</dd>
+                <dt>Pravilasan-nija-śīrṣa-deśāḥ</dt><dd>With hands shining upon their own heads</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Lord! desirous of serving you, Siva and Indra with their heads bowed and Kubera the lord of wealth and the protectors of the eight directions (Dikpalakas) with their hands tied in front in reverence are waiting for you.</div>
+                
+                <audio controls preload="none" data-start="3.9">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_16.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-17">
+                <div class="devanagari">धाटीषु ते विहगराज मृगाधिराज<br>नागाधिराज गजराज हयाधिराजाः ।<br>स्वस्वाधिकार महिमाधिकमर्थयन्ते<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥१७॥</div>
+                <span class="heading">IAST</span><div class="iast-content">dhāṭīṣu te vihagarāja mṛgādhirāja<br>nāgādhirāja gajarāja hayādhirājāḥ .<br>svasvādhikāra mahimādhika marthayante<br>śrīveṅkaṭācalapate tava suprabhātam ..17..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Dhāṭīṣu te</dt><dd>In Your military expeditions / processions</dd>
+                <dt>Vihagarāja</dt><dd>The King of Birds (Garuda)</dd>
+                <dt>Mṛgādhirāja</dt><dd>The King of Animals (Lion)</dd>
+                <dt>Nāgādhirāja</dt><dd>The King of Serpents (Adisesha)</dd>
+                <dt>Gajarāja</dt><dd>The King of Elephants (Gajendra / Airavata)</dd>
+                <dt>Hayādhirājāḥ</dt><dd>The King of Horses (Uchchaihshravas)</dd>
+                <dt>Svasva-adhikāra</dt><dd>Respectively, for their own roles/duties</dd>
+                <dt>Mahimā-adhikam</dt><dd>Greater power / glory</dd>
+                <dt>Arthayante</dt><dd>They are praying for</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+
+                <span class="heading">Translation</span><div class="translation">Venkatesa, seeking your benevolent look of approval Garuda and other leaders of your retinue are jostling for your first look to enhance their supervisory authority. Good morning to you.</div>
+                
+                <audio controls preload="none" data-start="3.6">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_17.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-18">
+                <div class="devanagari">सूर्येन्दु भौम बुध वाक्पति काव्यसौरि<br>स्वर्भानु केतु दिविषत्परिषत्प्रधानाः ।<br>त्वद्दास दास चरमावधि दासदासाः<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥१८॥</div>
+                <span class="heading">IAST</span><div class="iast-content">sūryendu bhauma budha vākpati kāvyasauri<br>svarbhānu ketu diviṣatpariṣatpradhānāḥ .<br>tvaddāsa dāsa caramāvadhi dāsadāsāḥ<br>śrīveṅkaṭācalapate tava suprabhātam ..18..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Sūrya-Indu-Bhauma</dt><dd>Sun, Moon, and Mars</dd>
+                <dt>Budha-Vākpati</dt><dd>Mercury and Jupiter (Vakpati/Guru)</dd>
+                <dt>Kāvya-Sauri</dt><dd>Venus (Kavya/Shukra) and Saturn (Sauri/Shani)</dd>
+                <dt>Svarbhānu-Ketu</dt><dd>Rahu (Svarbhanu) and Ketu</dd>
+                <dt>Diviṣat-Pariṣat-Pradhānāḥ</dt><dd>The chief members of the assembly of gods</dd>
+                <dt>Tvad-Dāsa-Dāsa</dt><dd>Servants of Your servants</dd>
+                <dt>Carama-Avadhi</dt><dd>To the furthest limit / end of the line</dd>
+                <dt>Dāsa-Dāsāḥ</dt><dd>The lowest of the servants</dd>
+                <dt>Śrī-Veṅkaṭācala-Pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+
+                <span class="heading">Translation</span><div class="translation">O Lord, the over lords of the nine planets,(Sun, Moon, Mangala, Budha, Guru,Shukra, Sani, Rahu,Kethu) are ready waiting to offer you their service.</div>
+                
+                <audio controls preload="none" data-start="4.4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_18.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-19">
+                <div class="devanagari">त्वत्पादधूलि भरितस्फुरितोत्तमाङ्गाः<br>स्वर्गापवर्ग निरपेक्ष निजान्तरङ्गाः ।<br>कल्पागमाकलनयाकुलतां लभन्ते<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥१९॥</div>
+                <span class="heading">IAST</span><div class="iast-content">tvatpādadhūli bharitasphuritottamāṅgāḥ<br>svargāpavarga nirapekṣa nijāntaraṅgāḥ .<br>kalpāgamākalanayākulatāṃ labhante<br>śrīveṅkaṭācalapate tava suprabhātam ..19..</div>
+                <span class="heading">Translation</span><div class="translation">Your devotees having ben purified by the dust of your feet, are serving you with intense devotion forgetting their real interest in Moksha and doubting whether they could get this opportunity in their next birth or not.</div>
+                
+                <audio controls preload="none" data-start="3.7">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_19.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-20">
+                <div class="devanagari">त्वद्गोपुराग्रशिखराणि निरीक्षमाणाः<br>स्वर्गापवर्गपदवीं परमां श्रयन्तः ।<br>मर्त्या मनुष्यभुवने मतिमाश्रयन्ते<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥२०॥</div>
+                <span class="heading">IAST</span><div class="iast-content">tvadgopurāgraśikharāṇi nirīkṣamāṇāḥ<br>svargāpavargapadavīṃ paramāṃ śrayantaḥ .<br>martyā manuṣyabhuvane matimāśrayante<br>śrīveṅkaṭācalapate tava suprabhātam ..20..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Tvad-Gopura-Agra</dt><dd>The tops of Your temple towers (Gopurams)</dd>
+                <dt>Śikharāṇi</dt><dd>The peaks/spires</dd>
+                <dt>Nirīkṣamāṇāḥ</dt><dd>Those who are gazing/looking at</dd>
+                <dt>Svarga-Apavarga</dt><dd>Heaven and Liberation (Moksha)</dd>
+                <dt>Padavīṃ Paramāṃ</dt><dd>The supreme paths/states</dd>
+                <dt>Śrayantaḥ</dt><dd>Even though they are capable of reaching</dd>
+                <dt>Martyāḥ</dt><dd>Mortals / Human beings</dd>
+                <dt>Manuṣya-Bhuvane</dt><dd>In this world of men (Earth)</dd>
+                <dt>Matim-Āśrayante</dt><dd>Resolve to stay / place their minds</dd>
+                <dt>Śrī-Veṅkaṭācala-Pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Venkateswara, people who came interested in Moksha samrajya look at the Vimana (crown) of your temple and want to serve you in this earthly abode forgetting what they came for.</div>
+                
+                <audio controls preload="none" data-start="4.6">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_20.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-21">
+                <div class="devanagari">श्रीभूमिनायक दयादिगुणामृताब्धे<br>देवाधिदेव जगदेकशरण्यमूर्ते ।<br>श्रीमन्ननन्तगरुडादिभिरर्चिताङ्घ्रे<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥२१॥</div>
+                <span class="heading">IAST</span><div class="iast-content">śrībhūmināyaka dayādiguṇāmṛtābdhe<br>devādhideva jagadekaśaraṇyamūrte .<br>śrīmannananta garuḍādibhirarcitāṅghre<br>śrīveṅkaṭācalapate tava suprabhātam ..21..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Śrī-bhūmi-nāyaka</dt><dd>Lord of Sri (Lakshmi) and Bhu (Mother Earth)</dd>
+                <dt>Dayādi-guṇa-amṛta-abdhe</dt><dd>O ocean of nectar-like qualities like mercy</dd>
+                <dt>Devādhideva</dt><dd>Lord of all lords / God of gods</dd>
+                <dt>Jagad-eka-śaraṇya-mūrte</dt><dd>The unique form who is the refuge of the universe</dd>
+                <dt>Śrīman</dt><dd>O Illustrious one / Consort of Sri</dd>
+                <dt>Ananta-garuḍa-ādibhiḥ</dt><dd>By Adisesha, Garuda, and others</dd>
+                <dt>Arcita-aṅghre</dt><dd>Whose feet are worshipped</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">Morning wishes to you Srinivasa; You are the lord of the Mother Earth(Bhoomi), you possess innumerable auspicious qualities like compassion, Lord of all Gods, the only refuge of the universe and waited on at your feet by Nityasuris (eternal companions) like Ananta and Garuda. Good morning.</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_21.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-22">
+                <div class="devanagari">श्रीपद्मनाभ पुरुषोत्तम वासुदेव<br>वैकुण्ठ माधव जनार्दन चक्रपाणे ।<br>श्रीवत्सचिह्न शरणागतपारिजात<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥२२॥</div>
+                <span class="heading">IAST</span><div class="iast-content">śrīpadmanābha puruṣottama vāsudeva<br>vaikuṇṭha mādhava janārdana cakrapāṇe .<br>śrīvatsacihna śaraṇāgatapārijāta<br>śrīveṅkaṭācalapate tava suprabhātam ..22..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Śrī-padmanābha</dt><dd>O Lord with the lotus in His navel</dd>
+                <dt>Puruṣottama</dt><dd>The Supreme Being among all persons</dd>
+                <dt>Vāsudeva</dt><dd>Son of Vasudeva / The indwelling Lord</dd>
+                <dt>Vaikuṇṭha</dt><dd>The Lord of the highest spiritual realm</dd>
+                <dt>Mādhava</dt><dd>The Consort of Ma (Lakshmi)</dd>
+                <dt>Janārdana</dt><dd>He who listens to the prayers of people</dd>
+                <dt>Cakrapāṇe</dt><dd>O Lord who holds the Discus in His hand</dd>
+                <dt>Śrīvatsa-cihna</dt><dd>One who bears the sacred Srivatsa mark on His chest</dd>
+                <dt>Śaraṇāgata-pārijāta</dt><dd>The wish-fulfilling tree for those who seek refuge</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Padmanabha, Purushottama, Vasudeva, Vaikunta,Madhava, identified by your insignias of Srivatsa and the disk(chakra) in your hand, You are like the havenly Parijata tree in granting the wishes of those who surrender at your feet. Good morning to you.</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_22.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-23">
+                <div class="devanagari">कन्दर्पदर्पहर सुन्दर दिव्यमूर्ते<br>कान्ताकुचाम्बुरुह कुटमल लोलदृष्टे ।<br>कल्याणनिर्मलगुणाकर दिव्यकीर्ते<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥२३॥</div>
+                <span class="heading">IAST</span><div class="iast-content">kandarpadarpahara sundara divyamūrte<br>kāntākucāmburuha kuṭamala loladṛṣṭe .<br>kalyāṇanirmalaguṇākara divyakīrte<br>śrīveṅkaṭācalapate tava suprabhātam ..23..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Kandarpa-darpa-hara</dt><dd>Destroyer of the pride of Kandarpa (the God of Love, Manmatha)</dd>
+                <dt>Sundara Divyamūrte</dt><dd>O beautiful One with a divine form</dd>
+                <dt>Kāntā-kuca-amburuha</dt><dd>The lotus-like breasts of His beloved (Lakshmi)</dd>
+                <dt>Kuṭmala-lola-dṛṣṭe</dt><dd>Whose eyes are restlessly/lovingly fixed like a bud</dd>
+                <dt>Kalyāṇa-nirmala-guṇākara</dt><dd>The mine/source of auspicious and pure qualities</dd>
+                <dt>Divya-kīrte</dt><dd>O One with divine fame</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">Your divyamangala vigraha is so beautiful as to vanquish the pride of Manmatha (Cupid), You are renowned in the Worlds for your blemishless auspicious qualities and you cast your blossoming eyesight on the fine parts of Mahalakshmi. Good morning to you.</div>
+                
+                <audio controls preload="none" data-start="3.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_23.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-24">
+                <div class="devanagari">मीनाकृते कमठ कोल नृसिंह वर्णिन्<br>स्वामिन् परश्वथतपोधन रामचन्द्र।<br>शेषांशराम यदुनन्दन कल्किरूप<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥२४॥</div>
+                <span class="heading">IAST</span><div class="iast-content">mīnākṛte kamaṭha kola nṛsiṃha varṇin<br>svāmin paraśvathatapodhana rāmacandra.<br>śeṣāṃśarāma yadunandana kalkirūpa<br>śrīveṅkaṭācalapate tava suprabhātam ..24..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Mīnākṛte</dt><dd>In the form of the Fish (Matsya)</dd>
+                <dt>Kamaṭha</dt><dd>The Tortoise (Kurma)</dd>
+                <dt>Kola</dt><dd>The Boar (Varaha)</dd>
+                <dt>Nṛsiṃha</dt><dd>The Man-Lion (Narasimha)</dd>
+                <dt>Varṇin</dt><dd>The celibate student (Vamana)</dd>
+                <dt>Paraśvatha-tapodhana</dt><dd>Parashurama (the ascetic with the axe)</dd>
+                <dt>Rāmacandra</dt><dd>Lord Rama (the moon of the Raghu clan)</dd>
+                <dt>Śeṣāṃśarāma</dt><dd>Balarama (the incarnation of Adisesha)</dd>
+                <dt>Yadunandana</dt><dd>Lord Krishna (the joy of the Yadu clan)</dd>
+                <dt>Kalkirūpa</dt><dd>In the form of Kalki</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Venktesa you have helped the world by your ten avatars like Matsya, Kurma etc. Good morning to you.</div>
+                
+                <audio controls preload="none" data-start="5.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_24.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-25">
+                <div class="devanagari">एला लवङ्ग घनसारसुगन्धितीर्थं<br>दिव्यं वियत्सरिति हेमघटेषु पूर्णम् ।<br>धृत्वाऽद्य वैदिक शिखामणयः प्रहृष्टाः<br>तिष्ठन्ति वेङ्कटपते तव सुप्रभातम् ॥२५॥</div>
+                <span class="heading">IAST</span><div class="iast-content">elā lavaṅga ghanasārasugandhitīrthaṃ<br>divyaṃ viyatsariti hemaghaṭeṣu pūrṇam .<br>dhṛtvā'dya vaidika śikhāmaṇayaḥ prahṛṣṭāḥ<br>tiṣṭhanti veṅkaṭapate tava suprabhātam ..25..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Elā-Lavaṅga</dt><dd>Cardamom and Cloves</dd>
+                <dt>Ghanasāra</dt><dd>Camphor (Pacha Karpooram)</dd>
+                <dt>Sugandhi-Tīrthaṃ</dt><dd>Fragrant holy water</dd>
+                <dt>Divyaṃ Viyatsariti</dt><dd>From the divine celestial river (Akasha Ganga)</dd>
+                <dt>Hema-Ghaṭeṣu Pūrṇam</dt><dd>Filled in golden pots</dd>
+                <dt>Dhṛtvā-Adya</dt><dd>Having held/carried them today</dd>
+                <dt>Vaidika-Śikhāmaṇayaḥ</dt><dd>The crest-jewels (best) of Vedic scholars</dd>
+                <dt>Prahṛṣṭāḥ Tiṣṭhanti</dt><dd>Are standing with great joy</dd>
+                <dt>Veṅkaṭapate</dt><dd>O Lord of Venkata</dd>
+            </dl>
+        </div>
+    </details>
+
+                <span class="heading">Translation</span><div class="translation">O Venkatachalapati, brahmins with vedic chants are waiting upon you with pots of Akasa Ganga water scented with cardamom, clove and other spices. May this be a glorious morn to you.</div>
+                
+                <audio controls preload="none" data-start="3.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_25.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-26">
+                <div class="devanagari">भास्वानुदेति विकचानि सरोरुहाणि<br>सम्पूरयन्ति निनदैः ककुभो विहङ्गाः ।<br>श्रीवैष्णवास्सततमर्थितमङ्गलास्ते<br>धामाश्रयन्ति तव वेङ्कट सुप्रभातम् ॥२६॥</div>
+                <span class="heading">IAST</span><div class="iast-content">bhāsvānudeti vikacāni saroruhāṇi<br>sampūrayanti ninadaiḥ kakubho vihaṅgāḥ .<br>śrī vaiṣṇavāssatata marthita maṅgalāste<br>dhāmāśrayanti tava veṅkaṭa suprabhātam ..26..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Bhāsvān-udeti</dt><dd>The Sun (The Luminous One) is rising</dd>
+                <dt>Vikacāni Saroruhāṇi</dt><dd>The lotuses are fully bloomed</dd>
+                <dt>Sampūrayanti</dt><dd>Are filling (completely)</dd>
+                <dt>Ninadaiḥ</dt><dd>With their sounds/chirping</dd>
+                <dt>Kakubhaḥ Vihaṅgāḥ</dt><dd>The birds in all directions</dd>
+                <dt>Śrī-Vaiṣṇavāḥ</dt><dd>The devotees of the Lord (Sri Vaishnavas)</dd>
+                <dt>Satatam-arthita</dt><dd>Always seeking/praying for</dd>
+                <dt>Maṅgalāḥ-te</dt><dd>Auspiciousness (to You)</dd>
+                <dt>Dhāma-āśrayanti</dt><dd>Are reaching/seeking refuge at Your abode</dd>
+                <dt>Veṅkaṭa</dt><dd>O Lord of Venkata</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">The sun has risen and flowers have opened their petals; the chirping of birds is echoed from all directions. Sri Vaishnavas are waiting singing your praise. Let this morning be glorious to you.</div>
+                
+                <audio controls preload="none" data-start="3.9">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_26.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-27">
+                <div class="devanagari">ब्रह्मादयस्सुरवरास्समहर्षयस्ते<br>सन्तस्सनन्दनमुखास्तवथ योगिवर्याः ।<br>धामान्तिके तव हि मङ्गलवस्तुहस्ताः<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥२७॥</div>
+                <span class="heading">IAST</span><div class="iast-content">brahmādayas sura varās sa maharṣayaste<br>santas sanandana mukhās tavatha yogi varyāḥ .<br>dhāmāntike tava hi maṅgalavastuhastāḥ<br>śrīveṅkaṭācalapate tava suprabhātam ..27..</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Brahmā-ādayaḥ</dt><dd>Brahma and others</dd>
+                <dt>Sura-varāḥ</dt><dd>The best of the gods (Devas)</dd>
+                <dt>Sa-maharṣayaḥ</dt><dd>Along with the great sages</dd>
+                <dt>Santaḥ</dt><dd>The saintly people</dd>
+                <dt>Sanandana-mukhāḥ</dt><dd>Headed by Sanandana (one of the four Kumaras)</dd>
+                <dt>Atha Yogivaryāḥ</dt><dd>And the most excellent of Yogis</dd>
+                <dt>Dhāma-antike</dt><dd>Near Your abode / In the vicinity of the temple</dd>
+                <dt>Maṅgala-vastu-hastāḥ</dt><dd>Holding auspicious items in their hands</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Venkatesa, Gods like Brahma, sadhus and yogeeswaras like Sanaka and Sanantana, are waiting at your gates bearing auspicous Pooja materials. Morning glory to you.</div>
+                
+                <audio controls preload="none" data-start="4.5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_27.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-28">
+                <div class="devanagari">लक्ष्मीनिवास निरवद्यगुणैकसिन्धो<br>संसार सागर समुत्तरणैकसेतो ।<br>वेदान्तवेद्यनिजवैभव भक्तभोग्य<br>श्रीवेङ्कटाचलपते तव सुप्रभातम् ॥२८॥ ( 2 )</div>
+                <span class="heading">IAST</span><div class="iast-content">lakṣmīnivāsa niravadyaguṇaikasindho<br>saṃsāra sāgara samuttaraṇaikaseto .<br>vedāntavedyanijavaibhava bhaktabhogya<br>śrīveṅkaṭācalapate tava suprabhātam ..28.. ( 2 )</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Lakṣmī-nivāsa</dt><dd>O Abode of Goddess Lakshmi</dd>
+                <dt>Niravadya-guṇa-eka-sindho</dt><dd>The incomparable ocean of flawless qualities</dd>
+                <dt>Saṃsāra-sāgara</dt><dd>The ocean of worldly existence (cycle of birth/death)</dd>
+                <dt>Samuttaraṇa-eka-seto</dt><dd>The only bridge to cross over (the ocean)</dd>
+                <dt>Vedānta-vedya</dt><dd>Known through the Upanishads (Vedanta)</dd>
+                <dt>Nija-vaibhava</dt><dd>One with inherent/true glory</dd>
+                <dt>Bhakta-bhogya</dt><dd>To be enjoyed/experienced by the devotees</dd>
+                <dt>Śrī-veṅkaṭācala-pate</dt><dd>O Lord of the Venkata hill</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">O Lord the abode of Lakhmi, the ocean of good qualities, the only boat to cross the ocean of Samsara, the true knowledge sought by Vedanta(Upanishads), the lord of ture glory enjoyed by devotees,glory to you</div>
+                
+                <audio controls preload="none" data-start="3.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_28.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="suprabhatam-29">
+                <div class="devanagari">इत्थं वृषाचलपतेरिह सुप्रभातं<br>ये मानवाः प्रतिदिनं पठितुं प्रवृत्ताः ।<br>तेषां प्रभातसमये स्मृतिरङ्गभाजां<br>प्रज्ञां परार्थसुलभां परमां प्रसूते ॥२९॥ ( 2 )</div>
+                <span class="heading">IAST</span><div class="iast-content">itthaṃ vṛṣācalapateriha suprabhātaṃ<br>ye mānavāḥ pratidinaṃ paṭhituṃ pravṛttāḥ .<br>teṣāṃ prabhātasamaye smṛtiraṅgabhājāṃ<br>prajñāṃ parārthasulabhāṃ paramāṃ prasūte ..29.. ( 2 )</div>
+<details class="word-details">
+        <summary>Click to show Word Meanings</summary>
+        <div class="word-meanings">
+            <dl>
+                <dt>Itthaṃ</dt><dd>In this manner / thus</dd>
+                <dt>Vṛṣācala-pateḥ</dt><dd>Of the Lord of Vrishadri (Venkateswara)</dd>
+                <dt>Suprabhātaṃ</dt><dd>This morning greeting (Suprabhatam)</dd>
+                <dt>Ye mānavāḥ</dt><dd>Those humans who...</dd>
+                <dt>Pratidinaṃ</dt><dd>Every day</dd>
+                <dt>Paṭhituṃ pravṛttāḥ</dt><dd>Are inclined / begin to recite</dd>
+                <dt>Teṣāṃ</dt><dd>For them</dd>
+                <dt>Prabhāta-samaye</dt><dd>At the time of dawn</dd>
+                <dt>Smṛti-raṅga-bhājāṃ</dt><dd>Who cherish the memory (of the Lord)</dd>
+                <dt>Prajñāṃ</dt><dd>Intelligence / Wisdom / Insight</dd>
+                <dt>Parārtha-sulabhāṃ</dt><dd>Which easily grants the Supreme Goal</dd>
+                <dt>Paramāṃ prasūte</dt><dd>Is produced / bestowed in supreme measure</dd>
+            </dl>
+        </div>
+    </details>
+                <span class="heading">Translation</span><div class="translation">(Salutations to Sri Govinda) Thus ends the Suprabhatam of the lord of Vrishachala hill here,<br>Those persons who will engage themselves in reciting this everyday with devotion,<br>And at dawn will worship Sri Govinda with mind and body and with intense devotion,<br>For them the highest attainment of spiritual wisdom will become easy by the grace of the supreme awakened in their hearts.</div>
+                
+                <audio controls preload="none" data-start="3.9">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_29.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            <h2 id="stotram" class="section-header">Stotram</h2>
+            <div class="stanza-card" id="stotram-1">
+<div class="devanagari">
+    कमलाकुच चूचुक कुङ्कमतो<br>
+    नियतारुणितातुलनीलतनो ।<br>
+    कमलायतलोचन लोकपते<br>
+    विजयीभव वेङ्कटशैलपते ॥ 1 ॥ ( 2 )
+</div>
+<span class="heading">IAST</span>
+<div class="iast-content">
+    kamalākuca cūcuka kuṅkumato<br>
+    niyatāruṇitātulanīlatano ।<br>
+    kamalāyatalocana lokapate<br>
+    vijayībhava veṅkaṭaśailapate ॥ 1 ॥ ( 2 )
+</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Kamalā-kucha</dt><dd>From the bosom (breast) of Goddess Lakshmi (Kamala)</dd>
+            <dt>Cūchuka-kuṅkumato</dt><dd>By the saffron/vermilion (kunkuma) marks</dd>
+            <dt>Niyata-aruṇita</dt><dd>Which is ever-reddened / always made red</dd>
+            <dt>Atula-nīla-tano</dt><dd>O Lord with the incomparable dark-blue body</dd>
+            <dt>Kamalāyata-lochana</dt><dd>O Lord with wide eyes like the lotus petal</dd>
+            <dt>Loka-pate</dt><dd>O Lord of the worlds (Universe)</dd>
+            <dt>Vijayī-bhava</dt><dd>May You be victorious / Be ever triumphant</dd>
+            <dt>Veṅkaṭa-śaila-pate</dt><dd>O Lord of the Venkata Hill (Tirumala)</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">Reddened by the saffron from Lakshmi's breasts, of dark blue form, with eyes wide as the lotus, lord of all — O lord of the Venkata hill, be victorious!</div>
+                
+                <audio controls preload="none" data-start="5.1">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_30.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-2">
+<div class="devanagari">सचतुर्मुख षण्मुख पञ्चमुख<br>प्रमुखाखिलदैवत मौलिमणे ।<br>शरणागतवत्सल सारनिधे<br>परिपालय मां वृषशैलपते ॥ 2 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">sacaturmukha ṣaṇmukha pañcamukha<br>pramukhākhiladaivata maulimaṇe ।<br>śaraṇāgatavatsala sāranidhe<br>paripālaya māṃ vṛṣaśailapate ॥ 2 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Sa-chaturmukha</dt><dd>Along with the four-faced (Brahma)</dd>
+            <dt>Ṣhaṇmukha</dt><dd>The six-faced (Subrahmanya/Kartikeya)</dd>
+            <dt>Pañchamukha</dt><dd>The five-faced (Shiva)</dd>
+            <dt>Pramukha-akhila-daivata</dt><dd>And all other prominent celestial beings / gods</dd>
+            <dt>Mauli-maṇe</dt><dd>O Crest-jewel on the crowns (the Supreme among them)</dd>
+            <dt>Śharaṇāgata-vatsala</dt><dd>O Protector who is compassionate to those seeking refuge</dd>
+            <dt>Sāra-nidhe</dt><dd>O Treasure house of the essence (of all goodness/virtue)</dd>
+            <dt>Paripālaya māṃ</dt><dd>Please protect/rule over me</dd>
+            <dt>Vṛṣa-śaila-pate</dt><dd>O Lord of the Vrishadri Hill</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">O crest-jewel of all the gods including four-faced Brahma and six-faced Kumara, O ocean of essence, refuge of those who surrender — protect me, O lord of Vrishadri.</div>
+                
+                <audio controls preload="none" data-start="4.2">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_31.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-3">
+                <div class="devanagari">अतिवेलतया तव दुर्विषहै-<br>रनुवेलकृतैरपराधशतैः ।<br>भरितं त्वरितं वृषशैलपते<br>परया कृपया परिपाहि हरे ॥ 3 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">ativēlatayā tava durviṣahai-<br>ranuvelakṛtairaparādhaśataiḥ ।<br>bharitaṃ tvaritaṃ vṛṣaśailapate<br>parayā kṛpayā paripāhi hare ॥ 3 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Ativelatayā</dt><dd>Beyond boundaries / excessively / immeasurably</dd>
+            <dt>Tava durvishahaiḥ</dt><dd>Which are unbearable to You</dd>
+            <dt>Anuvela-kṛtaiḥ</dt><dd>Committed at every moment / done repeatedly</dd>
+            <dt>Aparādha-śataiḥ</dt><dd>By hundreds of sins / transgressions</dd>
+            <dt>Bharitaṃ</dt><dd>Filled (with these sins)</dd>
+            <dt>Tvaritaṃ</dt><dd>Quickly / speedily (seeking refuge)</dd>
+            <dt>Vṛṣa-śaila-pate</dt><dd>O Lord of the Vrishadri Hill</dd>
+            <dt>Parayā kṛpayā</dt><dd>With supreme / boundless compassion</dd>
+            <dt>Paripāhi</dt><dd>Please protect / save (me)</dd>
+            <dt>Hare</dt><dd>O Lord Hari</dd>
+        </dl>
+    </div>
+</details>
+
+<span class="heading">Translation</span>
+<div class="translation">I have committed countless offences repeatedly, O lord of Venkata — forgive me swiftly with your supreme compassion, O Hari.</div>
+
+                
+                <audio controls preload="none" data-start="5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_32.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-4">
+<div class="devanagari">अधिवेङ्कटशैलमुदारमते-<br>र्जनताभिमताधिकदानरतात् ।<br>परदेवतया गदितानिगमैः<br>कमलादयितान्न परं कलये ॥ 4 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">adhiveṅkaṭaśailamudāramate-<br>rjanatābhimatādhikadānaratāt ।<br>paradevatayā gaditānigamaiḥ<br>kamalādayitānna paraṃ kalaye ॥ 4 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Adhi-veṅkaṭa-śailam</dt><dd>Residing upon the Venkata Hill</dd>
+            <dt>Udāra-mateḥ</dt><dd>Of the one with a noble/generous mind</dd>
+            <dt>Janatā-abhimata</dt><dd>Desired by the people / devotees</dd>
+            <dt>Adhika-dāna-ratāt</dt><dd>Who is delighted in giving more (than what is asked)</dd>
+            <dt>Para-devatayā</dt><dd>As the Supreme Deity</dd>
+            <dt>Gaditā-nigamaiḥ</dt><dd>Declared/proclaimed by the Vedas (Nigamas)</dd>
+            <dt>Kamalā-dayitāt</dt><dd>Than the beloved of Goddess Lakshmi (Kamala)</dd>
+            <dt>Na paraṃ kalaye</dt><dd>I do not recognize/know any other (superior being)</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">On the generous Venkata hill, among all the liberal givers, praised by the Vedas as the supreme deity — I know no greater god than the beloved of Kamala (Vishnu).</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_33.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-5">
+                <div class="devanagari">कलवेणुरवावशगोपवधू-<br>शतकोटिवृतात्स्मरकोटिसमात् ।<br>प्रतिवल्लविकाभिमतात्सुखदात्<br>वसुदेवसुतान्न परं कलये ॥ 5 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">kalaveṇuravāvaśagopavadhū-<br>śatakoṭivṛtātsmarakoṭisamat ।<br>prativallavikābhimatātsukhadāt<br>vasudevasutānna paraṃ kalaye ॥ 5 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Kala-veṇu-ravā</dt><dd>By the sweet, melodious sound of the flute</dd>
+            <dt>Avaśa-gopa-vadhū</dt><dd>The cowherd damsels (Gopis) who were captivated/entranced</dd>
+            <dt>Śata-koṭi-vṛtāt</dt><dd>Surrounded by hundreds of crores (of Gopis)</dd>
+            <dt>Smara-koṭi-samāt</dt><dd>Who is equal (in beauty) to millions of Manmathas (Cupids)</dd>
+            <dt>Prati-vallavikā</dt><dd>By every individual cowherd maiden (Gopi)</dd>
+            <dt>Abhimatāt-sukhadāt</dt><dd>Who is beloved and bestows happiness/bliss</dd>
+            <dt>Vasudeva-sutāt</dt><dd>Than the Son of Vasudeva (Lord Krishna)</dd>
+            <dt>Na paraṃ kalaye</dt><dd>I do not recognize any other (as Supreme)</dd>
+        </dl>
+    </div>
+</details>
+
+
+                <span class="heading">Translation</span>
+<div class="translation">
+    Encircled by billions of cowherd maidens captivated by the sweet sound of His flute, equal in beauty to millions of Kamadevas, the beloved giver of joy to every individual Gopi — I know no divinity greater than the son of Vasudeva (Krishna).
+</div>
+
+                
+                <audio controls preload="none" data-start="5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_34.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-6">
+<div class="devanagari">अभिरामगुणाकर दाशरथे<br>जगदेकधनुर्धर धीरमते ।<br>रघुनायक राम रमेश विभो<br>वरदो भव देव दयाजलधे ॥ 6 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">abhirāmaguṇākara dāśarathe<br>jagadekadhanurdhara dhīramate ।<br>raghunāyaka rāma rameśa vibho<br>varado bhava deva dayājaladhe ॥ 6 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Abhirāma-guṇākara</dt><dd>O Mine of beautiful/charming qualities</dd>
+            <dt>Dāśarathe</dt><dd>O Son of King Dasharatha (Lord Rama)</dd>
+            <dt>Jagad-eka-dhanurdhara</dt><dd>O Foremost/unrivaled archer in the world</dd>
+            <dt>Dhīra-mate</dt><dd>O One with a courageous/steady mind</dd>
+            <dt>Raghunāyaka Rāma</dt><dd>O Lord Rama, the leader of the Raghu clan</dd>
+            <dt>Rameśa</dt><dd>O Lord of Rama (Lakshmi)</dd>
+            <dt>Vibho</dt><dd>O All-pervading/Omnipresent Lord</dd>
+            <dt>Varado bhava deva</dt><dd>O Lord, please become the giver of boons</dd>
+            <dt>Dayā-jaladhe</dt><dd>O Ocean of mercy/compassion</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">O Dasharatha's son, treasury of auspicious qualities, sole wielder of the bow in all worlds, O Rama of firm mind, lord of Rama, O all-pervading one — be gracious, O ocean of compassion.</div>
+                
+                <audio controls preload="none" data-start="4.5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_35.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-7">
+               <div class="devanagari">अवनीतनयाकमनीयकरं<br>रजनीकरचारुमुखाम्बुरुहम् ।<br>रजनीचरराजतमोमिहिरं<br>महनीयमहं रघुराममये ॥ 7 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">avanītanayākamanīyakaraṃ<br>rajanīkaracārumukhāmburuham ।<br>rajanīcararājatamomihiraṃ<br>mahanīyamahaṃ raghurāmamaye ॥ 7 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Avanī-tanayā</dt><dd>By the daughter of the Earth (Goddess Sita)</dd>
+            <dt>Kamaniya-karaṃ</dt><dd>Whose hands are caressed / desired</dd>
+            <dt>Rajanī-kara</dt><dd>Like the maker of night (the Moon)</dd>
+            <dt>Chāru-mukhāmbu-ruham</dt><dd>Whose beautiful face is like a lotus flower</dd>
+            <dt>Rajanī-chara-rāja</dt><dd>For the king of the night-walkers (Ravana, the Demon King)</dd>
+            <dt>Tamo-mihiraṃ</dt><dd>Who is the Sun that destroys the darkness</dd>
+            <dt>Mahanīyam-ahaṃ</dt><dd>Unto that great/venerable one, I...</dd>
+            <dt>Raghurāmam-aye</dt><dd>Seek/reach out to that Rama of the Raghu clan</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">I meditate on Rama who grasps the tender lotus hand of Sita, moon-faced, annihilator of the proud rakshasas — the great and glorious Raghava.</div>
+                
+                <audio controls preload="none" data-start="4.7">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_36.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-8">
+               <div class="devanagari">सुमुखं सुहृदं सुलभं सुखदं<br>स्वनुजं च सुकायममोघशरम् ।<br>अपहाय रघूद्वहमन्यमहं<br>न कथञ्चन कञ्चन जातु भजे ॥ 8 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">sumukhaṃ suhṛdaṃ sulabhaṃ sukhadaṃ<br>svanujaṃ ca sukāyamamoghaśaram ।<br>apahāya raghūdvahamanyamahaṃ<br>na kathañcana kañcana jātu bhaje ॥ 8 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Sumukhaṃ</dt><dd>One with a pleasant/beautiful face</dd>
+            <dt>Suhṛdaṃ</dt><dd>A true friend (of all beings)</dd>
+            <dt>Sulabhaṃ</dt><dd>One who is easily accessible (to devotees)</dd>
+            <dt>Sukhadaṃ</dt><dd>The giver of happiness/bliss</dd>
+            <dt>Svanujaṃ cha</dt><dd>Along with His noble brothers (Lakshmana, etc.)</dd>
+            <dt>Sukāyam</dt><dd>One with a beautiful/divine form</dd>
+            <dt>Amogha-śaram</dt><dd>Whose arrows never miss their mark (unfailing)</dd>
+            <dt>Apahāya Raghūdvaham</dt><dd>Leaving aside the upholder of the Raghu clan (Rama)</dd>
+            <dt>Anyam-ahaṃ</dt><dd>Any other (god/entity), I...</dd>
+            <dt>Na kathañchana</dt><dd>In no way / under no circumstances</dd>
+            <dt>Kañchana jātu bhaje</dt><dd>Shall ever worship or seek refuge in</dd>
+        </dl>
+    </div>
+</details>
+
+
+                <span class="heading">Translation</span>
+<div class="translation">
+    Charming-faced, a true friend, easily approachable, bestower of bliss, accompanied by His noble brothers, of beautiful form, and possessing unfailing arrows — leaving aside that upholder of the Raghu clan (Rama), I shall never, under any circumstances, worship any other.
+</div>
+
+                
+                <audio controls preload="none" data-start="4.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_37.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-9">
+                <div class="devanagari">विना वेङ्कटेशं न नाथो न नाथः<br>सदा वेङ्कटेशं स्मरामि स्मरामि ।<br>हरे वेङ्कटेश प्रसीद प्रसीद<br>प्रियं वेङ्कटेश प्रयच्छ प्रयच्छ ॥ 9 ॥ ( 2 )</div>
+<span class="heading">IAST</span>
+<div class="iast-content">vinā veṅkaṭeśaṃ na nātho na nāthaḥ<br>sadā veṅkaṭeśaṃ smarāmi smarāmi ।<br>hare veṅkaṭeśa prasīda prasīda<br>priyaṃ veṅkaṭeśa prayaccha prayaccha ॥ 9 ॥ ( 2 )</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Vinā Veṅkaṭeśaṃ</dt><dd>Without Lord Venkateswara</dd>
+            <dt>Na nātho na nāthaḥ</dt><dd>There is no savior/protector, no master (at all)</dd>
+            <dt>Sadā Veṅkaṭeśaṃ</dt><dd>Always upon Lord Venkateswara</dd>
+            <dt>Smarāmi smarāmi</dt><dd>I meditate, I meditate (constantly remember)</dd>
+            <dt>Hare Veṅkaṭeśa</dt><dd>O Lord Hari! O Venkateswara!</dd>
+            <dt>Prasīda prasīda</dt><dd>Be pleased/gracious (with me), be pleased!</dd>
+            <dt>Priyaṃ Veṅkaṭeśa</dt><dd>That which is dear/beneficial, O Venkateswara</dd>
+            <dt>Prayachha prayachha</dt><dd>Please grant (to me), please bestow!</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">There is no lord for me other than Venkatesha; I always remember Venkatesha. O Hari Venkatesha, be gracious; O Venkatesha, grant me what I cherish.</div>
+                
+                <audio controls preload="none" data-start="5.0">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_38.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-10">
+                <div class="devanagari">अहं दूरतस्ते पदाम्भोजयुग्म-<br>प्रणामेच्छयागत्य सेवां करोमि ।<br>सकृत्सेवया नित्यसेवाफलं त्वं<br>प्रयच्छ प्रयच्छ प्रभो वेङ्कटेश ॥ 10 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">ahaṃ dūrataste padāmbhojayugma-<br>praṇāmecchayāgatya sevāṃ karomi ।<br>sakṛtsevayā nityasevāphalaṃ tvaṃ<br>prayaccha prayaccha prabho veṅkaṭeśa ॥ 10 ॥</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Ahaṃ</dt><dd>I</dd>
+            <dt>Dūratas-te</dt><dd>From a great distance to You</dd>
+            <dt>Padāmbhoja-yugma</dt><dd>The pair of Your lotus-like feet</dd>
+            <dt>Praṇāma-icchayā-āgatya</dt><dd>Having come with the desire to prostrate/bow</dd>
+            <dt>Sevāṃ karomi</dt><dd>Perform service (offering my worship)</dd>
+            <dt>Sakṛt-sevayā</dt><dd>By this one-time service (this single visit)</dd>
+            <dt>Nitya-sevā-phalaṃ</dt><dd>The fruit/reward of eternal/daily service</dd>
+            <dt>Tvaṃ prayachha prayachha</dt><dd>May You please grant, please bestow</dd>
+            <dt>Prabho Veṅkaṭeśa</dt><dd>O Lord Venkateswara</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">Having come from afar, eager to bow at your lotus feet, I render this service. Grant me the fruit of constant eternal service for this single act of devotion, O lord Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4.0">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_39.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="stotram-11">
+                <div class="devanagari">अज्ञानिना मया दोषा नशेषान्विहितान् हरे ।<br>क्षमस्व त्वं क्षमस्व त्वं शेषशैलशिखामणे ॥ 11 ॥ ( 2 )</div>
+<span class="heading">IAST</span>
+<div class="iast-content">ajñāninā mayā doṣā naśeṣānvihitān hare ।<br>kṣamasva tvaṃ kṣamasva tvaṃ śeṣaśailaśikhāmaṇe ॥ 11 ॥ ( 2 )</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Ajñāninā mayā</dt><dd>By me, who is ignorant / lacking in knowledge</dd>
+            <dt>Doṣān-aśeṣān</dt><dd>Sins/faults without remainder (countless/all of them)</dd>
+            <dt>Vihitān</dt><dd>Committed / performed</dd>
+            <dt>Hare</dt><dd>O Lord Hari</dd>
+            <dt>Kṣamasva tvaṃ</dt><dd>May You please forgive / please pardon</dd>
+            <dt>Kṣamasva tvaṃ</dt><dd>Please forgive (repeated for emphasis)</dd>
+            <dt>Śeṣa-śaila-śikhā-maṇe</dt><dd>O Crest-jewel of the Seshadri Hill</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">O Hari, in my ignorance I have committed countless offences. Forgive me, forgive me, O crest-jewel of Sheshadri.</div>
+                
+                <audio controls preload="none" data-start="3.5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_40.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            <h2 id="prapatti" class="section-header">Prapatti</h2>
+            <div class="stanza-card" id="prapatti-1">
+                <div class="devanagari">ईशानां जगतोऽस्य वेङ्कटपतेर्विष्णोः परां प्रेयसीं<br>तद्वक्षःस्थल नित्यवासरसिकां तत्क्षान्तिसंवर्धिनीम् ।<br>पद्मालङ्कृतपाणिपल्लवयुगां पद्मासनस्थां श्रियं<br>वात्सल्यादिगुणोज्ज्वलां भगवतीं वन्दे जगन्मातरम् ॥ ( 2 )</div>
+<span class="heading">IAST</span>
+<div class="iast-content">īśānāṃ jagato'sya veṅkaṭapaterviṣṇoḥ parāṃ preyasīṃ<br>tadvakṣaḥsthala nityavāsarasikāṃ tatkṣāntisaṃvardhinīm ।<br>padmālaṅkṛtapāṇipallavayugāṃ padmāsanasthāṃ śriyaṃ<br>vātsalyādiguṇojjvalāṃ bhagavatīṃ vande jaganmātaram ॥ ( 2 )</div>
+<details class="word-details">
+    <summary>Click to show Word Meanings</summary>
+    <div class="word-meanings">
+        <dl>
+            <dt>Īśānāṃ jagato-'sya</dt><dd>The Mistress/Ruler of this universe</dd>
+            <dt>Veṅkaṭapateḥ viṣṇoḥ</dt><dd>Of Lord Vishnu, the Lord of Venkata</dd>
+            <dt>Parāṃ preyasīm</dt><dd>The supreme beloved</dd>
+            <dt>Tad-vakṣaḥ-sthala</dt><dd>In His (Vishnu's) chest/heart</dd>
+            <dt>Nitya-vāsa-rasikāṃ</dt><dd>Who delights in residing eternally</dd>
+            <dt>Tat-kṣānti-saṃvardhinīm</dt><dd>Who increases His (the Lord's) patience/forgiveness</dd>
+            <dt>Padma-alaṅkṛta</dt><dd>Adorned with lotus flowers</dd>
+            <dt>Pāṇi-pallava-yugāṃ</dt><dd>In her pair of sprout-like (tender) hands</dd>
+            <dt>Padmāsana-sthāṃ</dt><dd>Who is seated upon a lotus</dd>
+            <dt>Śriyaṃ</dt><dd>Goddess Lakshmi (Shri)</dd>
+            <dt>Vātsalyādi-guṇa-ujjvalāṃ</dt><dd>Resplendent with qualities like motherly affection (Vatsalya)</dd>
+            <dt>Bhagavatīm</dt><dd>The Divine Goddess</dd>
+            <dt>Vande jagan-mātaram</dt><dd>I salute the Mother of the Universe</dd>
+        </dl>
+    </div>
+</details>
+
+                <span class="heading">Translation</span><div class="translation">I bow to Shri (Lakshmi), the supreme beloved of Venkatesha Vishnu, who ever delights in dwelling on his chest, who fosters his grace, whose hands hold the lotus, who is seated on the lotus — the divine mother of all worlds, radiant with qualities of affection.</div>
+                
+                <audio controls preload="none" data-start="4.7">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_41.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-2">
+                <div class="devanagari">श्रीमन् कृपाजलनिधे कृतसर्वलोक<br>सर्वज्ञ शक्त नतवत्सल सर्वशेषिन् ।<br>स्वामिन् सुशील सुलभाश्रितपारिजात<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 2 ॥ ( 2 )</div>
+<span class="heading">IAST</span>
+<div class="iast-content">śrīman kṛpājalanidhe kṛtasarvaloka<br>sarvajña śakta natavatsala sarvaśeṣin ।<br>svāmin suśīla sulabhāśritapārijāta<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 2 ॥ ( 2 )</div>
+
+                <span class="heading">Translation</span><div class="translation">O Srinivasa, ocean of compassion, creator of all worlds, all-knowing, mighty, compassionate to those who bow, supreme master of all, of gentle and accessible nature, refuge of the surrendered — I take refuge at your feet.</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_42.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-3">
+                <div class="devanagari">आनूपुरार्पितसुजातसुगन्धिपुष्प-<br>सौरभ्यसौरभकरौ समसन्निवेशौ ।<br>सौम्यौ सदाऽनुभवनेऽपि नवानुभाव्यौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 3 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">ānūpurār pitasujātasugandhipuṣpa-<br>saurabhyasaurabhakarau samasanniveśau ।<br>saumyau sada'nubhavane'pi navanubhavyau<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 3 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Adorned with anklets and honoured by flowers of beautiful fragrance, matched in exquisite proportion, ever gentle — yet revealing ever-new wonder to those who meditate eternally — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4.5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_43.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-4">
+                <div class="devanagari">सद्योविकासिसमुदित्त्वरसान्द्रराग-<br>सौरभ्यनिर्भरसरोरुहसाम्यवार्ताम् ।<br>सम्यक्षु साहसपदेषु विलेखयन्तौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 4 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">sadyovikāsisamudittvarasāndrarāga-<br>saurabhyanirbharasaroruhasāmyavārtām ।<br>samyakṣu sāhasapadeṣu vilekhayantau<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 4 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Instantly blooming, intensely fragrant, deep red in hue, surpassing the beauty of the lotus, leaving their mark of auspiciousness wherever they step — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_44.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-5">
+                <div class="devanagari">रेखामयध्वजसुधाकलशातपत्र-<br>वज्राङ्कुशाम्बुरुहकल्पकशङ्खचक्रैः ।<br>भव्यैरलङ्कृततलौ परतत्त्वचिह्नैः<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 5 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">rekhāmayadhvajasudhākalaśātapatra-<br>vajrāṅkuśāmburuhakalpakaśaṅkhacakraiḥ ।<br>bhavyairalaṅkṛtatalau paratattvacihnaiḥ<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 5 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Adorned with auspicious marks — the flag, umbrella, thunderbolt, goad, lotus, wish-granting tree, conch and discus — marks of the supreme reality itself — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="5.5">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_45.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-6">
+                <div class="devanagari">ताम्रोदरद्युतिपराजितपद्मरागौ<br>बाह्यैर्महोभिरभिभूतमहेन्द्रनीलौ ।<br>उद्यन्नखांशुभिरुदस्तशशाङ्कभासौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 6 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">tāmrōdaradyutiparijitapadmarāgau<br>bāhyairmahōbhirabhibhūtamahendranīlau ।<br>udyannakhāṃśubhirudastaśaśāṅkabhāsau<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 6 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Glowing red within, they outshine the ruby outside; their nails radiate light that eclipses the moon — I take refuge at these feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="3.8">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_46.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-7">
+                <div class="devanagari">स प्रेमभीति कमलाकर पल्लवाभ्यां<br>संवाहनेऽपि सपदि क्लममादधानौ ।<br>कान्ताववाङ्मनस गोचर सौकुमार्यौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 7 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">
+sapremabhīti kamalākara-pallavābhyāṃ<br>
+saṃvāhane'pi sapadi klama-mādadhānau ।<br>
+kāntāv-avāṅ-manasa gocara saukumāryau<br>
+śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 7 ॥
+</div>
+                <span class="heading">Translation</span><div class="translation">So tender that Lakshmi's lotus hands cause them pain when massaging with love — yet they are the sublime object of the noble-minded's deepest feeling — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="3.6">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_47.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-8">
+                <div class="devanagari">लक्ष्मीमही तदनुरूप निजानुभाव-<br>नीलादि दिव्यमहिषी करपल्लवानाम् ।<br>आरुण्यसङ्क्रमणतः किल सान्द्ररागौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 8 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">lakṣmīmahī tadanurūpa nijānubhāva-<br>nīlādi divyamahiṣī karapallavānām ।<br>āruṇyasaṅkramaṇataḥ kila sāndrarāgau<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 8 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Made richly red by the touch of the soft hands of Lakshmi, Bhu Devi, Nila Devi and the other divine consorts — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_48.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-9">
+                <div class="devanagari">नित्यानमद्विधिशिवादि किरीटकोटि-<br>प्रत्युप्तदीप्तनवरत्नमहःप्ररोहैः ।<br>नीराजनाविधिमुदारमुपादधानौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 9 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">nityānamadvidhiśivādi kirīṭakoṭi-<br>pratyuptadīptanavaratnamahaḥprarohaiḥ ।<br>nīrājanāvidhimudāramupādadhānau<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 9 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Whose radiance, from the gems in the crowns of ever-bowing Brahma, Shiva and others, performs a ceremonial wave-offering (nirajanaa) — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4.2">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_49.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-10">
+                <div class="devanagari">"विष्णोः पदे परम" इत्युदितप्रशंसौ<br>यौ "मध्व उत्स" इति भोग्यतयाऽप्युपात्तौ ।<br>भूयस्तथेति तव पाणितलप्रदिष्टौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 10 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">"viṣṇoḥ pade parama" ityuditapraśaṃsau<br>yau "madhva utsa" iti bhogyatayā'pyupāttau ।<br>bhūyastatheti tava pāṇitalapradiṣṭau<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 10 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Praised as "the supreme abode of Vishnu" and celebrated as "the spring of honey" — pointed out again to you by your own hand — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4.3">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_50.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-11">
+                <div class="devanagari">पार्थाय तत्सदृशसारधिना त्वयैव<br>यौ दर्शितौ स्वचरणौ शरणं व्रजेति ।<br>भूयोऽपि मह्यमिह तौ करदर्शितौ ते<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 11 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">pārthāya tatsadṛśasāradhinā tvayaiva<br>yau darśitau svacaraṇau śaraṇaṃ vrajeti ।<br>bhūyo'pi mahyamiha tau karadarśitau te<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 11 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">These feet which you yourself — acting as Arjuna's charioteer — showed to Arjuna saying "take refuge at my feet"; those same feet you now show to me with your own hand — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4.2">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_51.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-12">
+                <div class="devanagari">मन्मूर्ध्नि कालियफणे विकटाटवीषु<br>श्रीवेङ्कटाद्रिशिखरे शिरसि श्रुतीनाम् ।<br>चित्तेऽप्यनन्यमनसां सममाहितौ ते<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 12 ॥( 2 )</div>
+<span class="heading">IAST</span>
+<div class="iast-content">manmūrdhni kāliyaphaṇe vikaṭāṭavīṣu<br>śrīveṅkaṭādriśikhare śirasi śrutīnām ।<br>citte'pyananyamanasāṃ samamāhitau te<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 12 ॥( 2 )</div>
+
+                <span class="heading">Translation</span><div class="translation">Placed on my head, on the hood of Kaliya, in the dense forest, on the summit of Venkatadri, on the crowns of the Vedas, and equally in the heart of those of single-pointed mind — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="5.3">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_52.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-13">
+                <div class="devanagari">अम्लानहृष्यदवनीतलकीर्णपुष्पौ<br>श्रीवेङ्कटाद्रिशिखराभरणायमानौ ।<br>आनन्दिताखिलमनोनयनौ तवैतौ<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 13 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">amlānahṛṣyadavannītalakīrṇapuṣpau<br>śrīveṅkaṭādriśikhirābharaṇāyamānau ।<br>ānanditākhilamanonayanau tavaitau<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 13 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Feet on which unfading fresh flowers are ever scattered, which are the supreme ornament of Venkata's summit, which fill all minds and eyes with bliss — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4.7">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_53.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-14">
+                <div class="devanagari">प्रायः प्रपन्नजनताप्रथमावगाह्यौ<br>मातुः स्तनाविव शिशोरमृतायमानौ ।<br>प्राप्तौ परस्परतुलामतुलान्तरौ ते<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 14 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">prāyaḥ prapannajanatāprathamāvagāhyau<br>mātuḥ stanāviva śiśoramṛtāyamānau ।<br>prāptau parasparatulāmatulāntarau te<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 14 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Drunk first with joy by the surrendered, like a baby at its mother's breast — matchless, yet each foot matching the other in equal splendour — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_54.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-15">
+                <div class="devanagari">सत्त्वोत्तरैः सततसेव्यपदाम्बुजेन<br>संसारतारकदयार्द्रदृगञ्चलेन ।<br>सौम्योपयन्तृमुनिना मम दर्शितौ ते<br>श्रीवेङ्कटेशचरणौ शरणं प्रपद्ये ॥ 15 ॥ ( 2 )</div>
+<span class="heading">IAST</span>
+<div class="iast-content">sattvottaraiḥ satatasevyapadāmbujena<br>saṃsāratārakadayārdradṛgañcalena ।<br>saumyopayantṛmuninā mama darśitau te<br>śrīveṅkaṭeśacaraṇau śaraṇaṃ prapadye ॥ 15 ॥ ( 2 )</div>
+
+                <span class="heading">Translation</span><div class="translation">These feet were shown to me by Saumyopayantri Muni (Tiruvaymozhi Pillai) — one whose pure mind is ever devoted to those lotus feet, whose compassionate gaze rescues souls from samsara — I take refuge at the feet of Venkatesha.</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_55.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="prapatti-16">
+                <div class="devanagari">श्रीश श्रिया घटिकया त्वदुपायभावे<br>प्राप्ये त्वयि स्वयमुपायतया स्फुरन्त्या ।<br>नित्याश्रिताय निरवद्यगुणाय तुभ्यं<br>स्यां किङ्करो वृषगिरीश न जातु मह्यम् ॥ 16 ॥ ( 2 )<br>इति श्रीवेङ्कटेशप्रपत्तिः ॥<br></div>
+<span class="heading">IAST</span>
+<div class="iast-content">śrīśa śriyā ghaṭikayā tvadupāyabhāve<br>prāpye tvayi svayamupāyatayā sphurantyā ।<br>nityāśritāya niravadyaguṇāya tubhyaṃ<br>syāṃ kiṅkaro vṛṣagirīśa na jātu mahyam ॥ 16 ॥ ( 2 )<br>>iti śrīveṅkaṭeśaprapattiḥ ॥<br></div>
+
+                <span class="heading">Translation</span><div class="translation">O Lord, with Shri (Lakshmi) as the means and you as the goal — you who are the eternal refuge of those who depend on you, of flawless attributes — may I become your servant, O lord of Vrishagiri, never belonging to myself alone.<br>Thus the Sri Venkatesha Prapatti is complete.<br></div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_56.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            <h2 id="mangalam" class="section-header">Maṅgalāśāsanam</h2>
+            <div class="stanza-card" id="mangalam-1">
+<div class="devanagari">श्रियः कान्ताय कल्याणनिधये निधयेऽर्थिनाम् ।<br>श्रीवेङ्कटनिवासाय श्रीनिवासाय मङ्गलम् ॥ 1 ॥ ( 2 )</div>
+<span class="heading">IAST</span>
+<div class="iast-content">śriyaḥ kāntāya kalyāṇanidhaye nidhaye'rthinām ।<br>śrīveṅkaṭanivāsāya śrīnivāsāya maṅgalam ॥ 1 ॥ ( 2 )</div>
+
+                <span class="heading">Translation</span><div class="translation">Auspiciousness (mangalam) to the beloved of Shri (Lakshmi), the ocean of auspicious qualities, the refuge of those in need — to Srinivasa, the dweller of Venkata hill, be all auspiciousness.</div>
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_57.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-2">
+               <div class="devanagari">लक्ष्मीसविभ्रमालोकसुभ्रूविभ्रमचक्षुषे ।<br>चक्षुषे सर्वलोकानां वेङ्कटेशाय मङ्गलम् ॥ 2 ॥</div>
+<span class="heading">IAST</span>
+<div class="iast-content">lakṣmīsavibhramālōkasubhrūvibhramacakṣuṣē ।<br>cakṣuṣē sarvalōkānāṃ vēṅkaṭēśāya maṅgaḻam ॥ 2 ॥</div>
+
+                <span class="heading">Translation</span><div class="translation">Auspiciousness to Venkatesha, whose eyes are the very vision of all the worlds, captivating with the graceful glances of Lakshmi.</div>
+                
+                
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_58.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-3">
+                <div class="stanza-card" id="mangalam-3">
+    <div class="devanagari">श्रीवेङ्कटाद्रिशृङ्गाग्रमङ्गलाभरणाङ्घ्रये ।<br>मङ्गलानां निवासाय वेङ्कटेशाय  मङ्गलम् ॥ 3 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">śrīveṅkaṭādriśṛṅgāgramaṅgalābharaṇāṅghraye ।<br>maṅgalānāṃ nivāsāya vēṅkaṭēśāya maṅgalam ॥ 3 ॥</div>
+    <span class="heading">Translation</span>
+    <div class="translation">Auspiciousness to Srinivasa — whose lotus feet are the ornaments adorning the very summit of the Venkata hill, the abode of all auspiciousness.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_59.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-4">
+                <div class="stanza-card" id="mangalam-4">
+    <div class="devanagari">सर्वावयवसौन्दर्यसम्पदा सर्वचेतसाम् ।<br>सदा सम्मोहनायास्तु वेङ्कटेशाय मङ्गलम् ॥ 4 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">sarvāvayavasaundaryasampadā sarvacetasām ।<br>sadā sammohanāyāstu veṅkaṭeśāya maṅgalam ॥ 4 ॥</div>
+    <span class="heading">Translation</span>
+    <div class="translation">Auspiciousness to Venkatesha, whose beauty of every limb eternally enchants the minds of all beings.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_60.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-5">
+                <div class="stanza-card" id="mangalam-5">
+    <div class="devanagari">नित्याय निरवद्याय सत्यानन्दचिदात्मने ।<br>सर्वान्तरात्मने श्रीमद्वेङ्कटेशाय मङ्गलम् ॥ 5 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">nityāya niravadyāya satyānandacidātmane ।<br>sarvāntarātmane śrīmadveṅkaṭeśāya maṅgalam ॥ 5 ॥</div>
+    <span class="heading">Translation</span>
+    <div class="translation">Auspiciousness to Venkatesha — the eternal, the flawless, the embodiment of true bliss and pure consciousness, the inner self of all.</div>
+</div>
+ 
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_61.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-6">
+                <div class="stanza-card" id="mangalam-6">
+    <div class="devanagari">स्वतःसर्वविदे सर्वशक्तये सर्वशेषिणे ।<br>सुलभाय सुशीलाय वेङ्कटेशाय मङ्गलम् ॥ 6 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">svataḥsarvavide sarvaśaktaye sarvaśeṣiṇe ।<br>sulabhāya suśīlāya veṅkaṭeśāya maṅgalam ॥ 6 ॥</div>
+    <span class="heading">Translation</span>
+    <div class="translation">Auspiciousness to Venkatesha — who is all-knowing of himself, omnipotent, the supreme master of all, yet easily accessible and of gentle disposition.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_62.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-7">
+                <div class="stanza-card" id="mangalam-7">
+    <div class="devanagari">परस्मै ब्रह्मणे पूर्णकामाय परमात्मने ।<br>प्रयुञ्जे परतत्त्वाय वेङ्कटेशाय मङ्गलम् ॥ 7 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">parasmai brahmaṇe pūrṇakāmāya paramātmane ।<br>prayuñje paratattvāya veṅkaṭeśāya maṅgalam ॥ 7 ॥</div>
+    <span class="heading">Translation</span>
+    <div class="translation">Auspiciousness to Venkatesha, the supreme Brahman, whose desires are ever fulfilled, the Paramatma, to whom I offer this prayer of auspiciousness.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_63.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-8">
+                <div class="stanza-card" id="mangalam-8">
+    <div class="devanagari">आकारतत्त्वमश्रान्तमात्मनामनुपश्यताम् ।<br>अतृप्त्यमृतरूपाय वेङ्कटेशाय मङ्गलम् ॥ 8 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">ākāratattvamaśrāntamātmanāmanupaśyatām ।<br>atṛptyamṛtarūpāya veṅkaṭeśāya maṅgalam ॥ 8 ॥</div>
+    <span class="heading">Translation</span>
+    <div class="translation">Auspiciousness to Venkatesha — whose form brings insatiable delight even to those who behold him eternally, of the nature of immortal nectar.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_64.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-9">
+               <div class="stanza-card" id="mangalam-9">
+    <div class="devanagari">प्रायः स्वचरणौ पुंसां शरण्यत्वेन पाणिना ।<br>कृपयाऽऽदिशते श्रीमद्वेङ्कटेशाय मङ्गलम् ॥ 9 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">prāyaḥ svacaraṇau puṃsāṃ śaraṇyatvena pāṇinā ।<br>kṛpayā''diśate śrīmadveṅkaṭeśāya maṅgalam ॥ 9 ॥</div>
+    <span class="heading">Translation</span><div class="translation">Auspiciousness to Venkatesha, who graciously extends his own feet to those who seek refuge, indicating them as the means of salvation.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_65.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-10">
+                <div class="stanza-card" id="mangalam-10">
+    <div class="devanagari">दयामृततरङ्गिण्यास्तरङ्गैरिव शीतलैः ।<br>अपाङ्गैस्सिञ्चते विश्वं वेङ्कटेशाय मङ्गलम् ॥ 10 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">dayāmṛtataraṅgiṇyāstaraṅgairiva śītalaiḥ ।<br>apāṅgaissiñcate viśvaṃ veṅkaṭeśāya maṅgalam ॥ 10 ॥</div>
+    <span class="heading">Translation</span><div class="translation">Auspiciousness to Venkatesha — whose compassionate sidelong glances sprinkle the universe with cool waves of mercy like a river of ambrosia.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_66.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-11">
+                <div class="stanza-card" id="mangalam-11">
+    <div class="devanagari">स्रग्भूषाम्बरहेतीनां सुषमाऽऽवहमूर्तये ।<br>सर्वार्तिशमनायास्तु वेङ्कटेशाय मङ्गलम् ॥ 11 ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">sragbhūṣāmbarahetīnāṃ suṣamā''vahamūrtaye ।<br>sarvārtiśamanāyāstu veṅkaṭeśāya maṅgalam ॥ 11 ॥</div>
+    <span class="heading">Translation</span><div class="translation">Auspiciousness to Venkatesha, whose divine form bears garlands, ornaments, garments and weapons of dazzling splendour, the remover of all afflictions.</div>
+</div>
+
+               
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_67.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-12">
+                <div class="stanza-card" id="mangalam-12">
+    <div class="devanagari">श्रीवैकुण्ठविरक्ताय स्वामिपुष्करिणीतटे ।<br>रमया रममाणाय वेङ्कटेशाय मङ्गलम् ॥ 12 ॥ ( 2 )</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">śrīvaikuṇṭhaviraktāya svāmipuṣkariṇītaṭe ।<br>ramayā ramamāṇāya veṅkaṭeśāya maṅgalam ॥ 12 ॥ ( 2 )</div>
+    <span class="heading">Translation</span><div class="translation">Auspiciousness to Venkatesha — who turned away from Vaikunta to sport with Ramaa on the banks of Svami Pushkarini on Venkatadri.</div>
+</div>
+
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_68.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-13">
+                <div class="stanza-card" id="mangalam-13">
+    <div class="devanagari">श्रीमत्सुन्दरजामातृमुनिमानसवासिने ।<br>सर्वलोकनिवासाय श्रीनिवासाय मङ्गलम् ॥ 13 ॥ ( 2 )</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">śrīmatsundarajāmātṛmunimānasavāsine ।<br>sarvalokanivāsāya śrīnivāsāya maṅgalam ॥ 13 ॥ ( 2 )</div>
+    <span class="heading">Translation</span><div class="translation">Auspiciousness to Srinivasa — who dwells in the heart of the great Acharya Sundara Jamamatri Muni (Manavala Mamunigal) and in the hearts of all worlds.</div>
+</div>
+
+              
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_69.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            
+            <div class="stanza-card" id="mangalam-14">
+                  <div class="stanza-card" id="mangalam-14">
+    <div class="devanagari">मङ्गलाशासनपरैर्मदाचार्यपुरोगमैः ।<br>सर्वैश्च पूर्वैराचार्यैः सत्कृतायास्तु मङ्गलम् ॥ 14 ॥<br>श्रीपद्मावतीसमेत श्रीश्रीनिवासपरब्रह्मणे नमः ॥</div>
+    <span class="heading">IAST</span>
+    <div class="iast-content">maṅgalāśāsanaparairmadācāryapurogamaiḥ ।<br>sarvaiśca pūrvairācāryaiḥ satkṛtāyāstu maṅgalam ॥ 14 ॥<br>śrīpadmāvatīsameta śrīśrīnivāsaparabrahmaṇe namaḥ ॥</div>
+    <span class="heading">Translation</span>
+    <div class="translation">May all auspiciousness be to the Lord, as proclaimed by the Acharyas — beginning with my own teacher — and all the previous Acharyas who offered this sacred mangalasasanam.<br>Salutations to Sri Srinivasa, the supreme Brahman, together with Sri Padmavati.</div>
+</div>
+
+              
+                <audio controls preload="none" data-start="4">
+                    <source src="https://filedn.com/l9IDdY852i6RpBJQvovl9tY/Venkateshwara_Suprabhatham/Shloka_70.m4a" type="audio/mp4">
+                </audio>
+            </div>
+            </div>
+
+   <script>
+    let currentFontSize = 2.1;
+    let currentSpeed = 1.0;
+    let playMode = 'normal'; 
+    let repeatCounter = 1;
+
+    // --- DARK MODE LOGIC ---
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.querySelector('#theme-btn i').className = 'fa-solid fa-sun';
+        } else {
+            document.body.removeAttribute('data-theme');
+            document.querySelector('#theme-btn i').className = 'fa-solid fa-moon';
+        }
+    }
+
+    // Initialization: Force Dark Mode
+    applyTheme('dark');
+
+    function toggleTheme() { 
+        const isDark = document.body.hasAttribute('data-theme');
+        applyTheme(isDark ? 'light' : 'dark');
+    }
+    // --- END DARK MODE LOGIC ---
+
+    // --- UPDATED PLAY MODE LOGIC ---
+    function togglePlayMode(mode) {
+        const buttons = {
+            loop: document.getElementById('loop-btn'),
+            cont: document.getElementById('cont-btn'),
+            parayana: document.getElementById('parayana-btn')
+        };
+
+        // Toggle logic: return to 'normal' if the same mode is clicked again
+        playMode = (playMode === mode) ? 'normal' : mode;
+        
+        // Update UI state for all buttons
+        Object.keys(buttons).forEach(key => {
+            if (buttons[key]) {
+                buttons[key].classList.toggle('active', playMode === key);
+            }
+        });
+        
+        repeatCounter = 1; // Reset counter for a fresh start
+    }
+
+    document.addEventListener('play', function(e) {
+        if(e.target.tagName === 'AUDIO') {
+            const startTime = parseFloat(e.target.getAttribute('data-start')) || 0;
+            if (e.target.currentTime < startTime && e.target.currentTime < 0.5) {
+                e.target.currentTime = startTime;
+            }
+
+            document.querySelectorAll('audio').forEach(a => {
+                if (a !== e.target) { 
+                    a.pause(); 
+                    a.parentElement.classList.remove('playing'); 
+                }
+            });
+            e.target.parentElement.classList.add('playing');
+            e.target.playbackRate = currentSpeed;
+        }
+    }, true);
+
+    // --- UPDATED ENDED LISTENER FOR PĀRĀYAṆA ---
+    document.addEventListener('ended', function(e) {
+        if(e.target.tagName === 'AUDIO') {
+            const card = e.target.closest('.stanza-card');
+            const maxRepeats = parseInt(document.getElementById('repeat-count').value);
+            const startTime = parseFloat(e.target.getAttribute('data-start')) || 0;
+
+            if (playMode === 'loop') {
+                e.target.currentTime = startTime;
+                e.target.play();
+            } 
+            else if (playMode === 'cont') {
+                if (repeatCounter < maxRepeats) {
+                    repeatCounter++;
+                    e.target.currentTime = startTime;
+                    e.target.play();
+                } else {
+                    repeatCounter = 1;
+                    playNext(e.target);
+                }
+            }
+            // NEW: Pārāyaṇa Mode Logic
+            else if (playMode === 'parayana') {
+                const hasMarker = card.innerText.includes('( 2 )');
+                // Doubles the effective repeat count if ( 2 ) is found
+                const targetRepeats = hasMarker ? maxRepeats * 2 : maxRepeats;
+
+                if (repeatCounter < targetRepeats) {
+                    repeatCounter++;
+                    e.target.currentTime = startTime;
+                    e.target.play();
+                } else {
+                    repeatCounter = 1;
+                    playNext(e.target);
+                }
+            }
+        }
+    }, true);
+
+    function playNext(currentAudio) {
+        const cards = Array.from(document.querySelectorAll('.stanza-card'));
+        const currentIndex = cards.indexOf(currentAudio.parentElement);
+        if (currentIndex < cards.length - 1) {
+            const nextCard = cards[currentIndex + 1];
+            const nextAudio = nextCard.querySelector('audio');
+            jumpTo(nextCard.id);
+            setTimeout(() => nextAudio.play(), 600);
+        }
+    }
+
+    function jumpTo(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            const headerHeight = document.querySelector('.sticky-wrapper').offsetHeight;
+            const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+    }
+
+    function adjustFont(delta) {
+        currentFontSize = Math.max(1.2, Math.min(4.0, currentFontSize + delta));
+        document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'rem');
+    }
+
+    function changePlaybackSpeed(speed) {
+        currentSpeed = parseFloat(speed);
+        document.querySelectorAll('audio').forEach(a => a.playbackRate = currentSpeed);
+    }
+</script>
+</body>
+</html>

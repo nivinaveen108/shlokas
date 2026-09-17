@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivi 108 — Shlokas Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700&family=Yantra+Manav:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --primary: #ff9933;
+            --accent: #d4af37;
+            --border: #332b21;
+            color-scheme: dark;
+        }
+
+        body[data-theme="light"] {
+            --bg: #fdfaf1;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #5d6d7e;
+            --primary: #990000;
+            --accent: #b8860b;
+            --border: #e0d8c3;
+            color-scheme: light;
+        }
+
+        body {
+            font-family: 'Martel', serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            padding: 3.5rem 1rem 2rem;
+            border-bottom: 2px solid var(--border);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin: 8px 0 0;
+            font-style: italic;
+        }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+            flex: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section-title {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .app-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-top: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .app-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(184, 134, 11, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin: 0 0 6px;
+        }
+
+        .card-sub {
+            font-size: 0.95rem;
+            color: var(--accent);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Yantra Manav', sans-serif;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-action {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: bold;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        footer {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <header>
+        <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
+            <i class="fa-solid fa-sun"></i>
+        </button>
+        <h1>निवी १०८ श्लोक सङ्ग्रह</h1>
+        <p class="subtitle">Nivi 108 Shloka Sangraha — Family Digital Legacy</p>
+    </header>
+
+    <div class="container">
+        <div class="section-title">Select Sacred Text</div>
+        
+        <div class="library-grid">
+            <!-- Suprabhatam Card (Active Now) -->
+            <a href="suprabhatam/index.html" class="app-card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-sun-plant-wilt"></i></div>
+                    <h3 class="card-title">श्रीवेङ्कटेश्वर सुप्रभातम</h3>
+                    <div class="card-sub">Śrī Veṅkaṭēśvara Suprabhātam</div>
+                    <p class="card-desc">Divine morning awakening hymns featuring synchronized audio, word meanings, repeat loops, and Pārāyaṇa mode.</p>
+                </div>
+                <div class="card-action">Open Reader <i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Narayaneeyam Card (Ready for future copy) -->
+            <a href="narayaneeyam/index.html" class="app-card">
+                <div>
+                    <div class="card-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+                    <h3 class="card-title">नारायणीयम्</h3>
+                    <div class="card-sub">Nārāyaṇīyam</div>
+                    <p class="card-desc">The monumental devotional masterpiece detailing the glorious avataras and divine lilas across sacred Dashakams.</p>
+                </div>
+                <div class="card-action">Open Reader <i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>A digital heritage preserved for family and future generations.</p>
+    </footer>
+
+    <script>
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.body.setAttribute('data-theme', 'light');
+                document.querySelector('#theme-btn i').className = 'fa-solid fa-moon';
+            } else {
+                document.body.removeAttribute('data-theme');
+                document.querySelector('#theme-btn i').className = 'fa-solid fa-sun';
+            }
+        }
+
+        function toggleTheme() {
+            const isLight = document.body.hasAttribute('data-theme');
+            applyTheme(isLight ? 'dark' : 'light');
+        }
+    </script>
+</body>
+</html>
